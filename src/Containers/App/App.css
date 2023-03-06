@@ -14,13 +14,14 @@
   --foreground-color: #141414;
   --border-color: #373737;
   --card-background: #fff;
+  --text-color: #ddd
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   font-size: var(--base-font-size);
   background-color: var(--background-color);
-  color: #ddd
+  color: var(--text-color);
 }
 
 p {
@@ -36,6 +37,12 @@ label {
   font-size: var(--base-font-size);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: var(--text-color);
+  font-weight: 500;
+}
 .react-json-view, .jsonStringContainer {
   width: 100%;
   padding: 10px;
@@ -268,10 +275,17 @@ label {
   margin-bottom: 10px;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.margin5 {
+  margin: 5px;
+}
+
 .sideMargin5px {
   margin: 0 5px;
 }
-
 
 .ReactCollapse--collapse {
   width: 100%;

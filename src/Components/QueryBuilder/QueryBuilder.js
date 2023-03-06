@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import RuleList from './ruleList.js';
-import { Row } from 'antd';
-import ReactJson from 'react-json-view'
 import { randomizeId } from '../../services/utilsService';
 import './QueryBuilder.css'
 
@@ -193,6 +191,9 @@ class QueryBuilder extends Component {
         handleDeleteRule={(id) => this.handleDeleteRule(id)}
       />
       <div className="flex-100 layout-row layout-wrap layout-align-start-start padd10 jsonStringContainer">
+        <div className="flex-100 layout-row layout-wrap layout-align-start-start">
+          <h3>Builder Output</h3>
+        </div>
          <pre>{JSON.stringify(this.state.rules,null,2)}</pre>
       </div>
     </div>;

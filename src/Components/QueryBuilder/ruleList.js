@@ -8,7 +8,7 @@ const RuleList = (props) => {
   return <React.Fragment>
     {props.rules.map((item) => (
       <React.Fragment key={item.key}>
-        {item['condition'] ? <div className="rules-wrap">
+        {item['condition'] ? <div className="rules-wrap padd15">
           <div className="rules-header flex-100 layout-row layout-wrap layout-align-start-start">
             <div className="flex-100 layout-row layout-wrap layout-align-start-start">
               <div className="flex-50 layout-row layout-wrap layout-align-start-start">

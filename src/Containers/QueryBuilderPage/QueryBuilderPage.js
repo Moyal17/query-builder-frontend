@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { getUserQueries } from '../../store/actions';
+import { getUserQueries, getMovies } from '../../store/actions';
 import QueryBuilder from "../../Components/QueryBuilder/QueryBuilder";
 import QueryExecutor from "../../Components/QueryExecutor/QueryExecutor";
 import 'antd/dist/antd.less';
@@ -12,8 +12,14 @@ class QueryBuilderPage extends Component {
     this.state = {
       queryList: [
         {
-        id: 'n3l2nl41', name: 'Get Movie Titles', description: 'getting all movie titles from the DB.',
-        response: {
+        id: 'n3l2nl41',
+          name: 'Get Movie Titles',
+          description: 'getting all movie titles from the DB.',
+          model: 'movies',
+          jsonQuery: '',
+          sqlQuery: '',
+
+          response: {
             command: 'SELECT',
             rowCount: 18,
             rows: [
@@ -64,6 +70,8 @@ class QueryBuilderPage extends Component {
   async componentDidMount () {
     try {
       // const data = await this.props.getUserQueries();
+      const data = await this.props.getMovies();
+      console.log('componentDidMount: ', data)
     } catch (e) {
       console.log('handle error');
     }
@@ -77,11 +85,18 @@ class QueryBuilderPage extends Component {
     const { queryList } = this.state;
     return (
       <main id="main">
-        <h1>Query Builder Page</h1>
-        <Link to={'/'}>Home</Link>
+        <div className="flex-100 layout-row layout-wrap layout-align-center padd15 text-center">
+          <h1 className="flex-100 layout-row layout-align-center">Query Builder Page</h1>
+          <Link to={'/'}>Home</Link>
+        </div>
         <QueryBuilder queryResult={(query) => {this.handleQueryResult(query)}}/>
         <div className="flex-100 layout-row layout-wrap layout-align-start-start padd15">
-        { queryList && queryList.length > 0 && queryList.map((query) => <QueryExecutor key={query.id} query={query}/> )}
+          <div className="flex-100 layout-row layout-wrap layout-align-start-start">
+            <h2>Your queries</h2>
+          </div>
+          { queryList && queryList.length > 0 && queryList.map((query) => (
+          <QueryExecutor key={query.id} query={query}/>
+        ))}
         </div>
       </main>
     );
@@ -95,6 +110,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getUserQueries: () => dispatch(getUserQueries()),
+  getMovies: () => dispatch(getMovies()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QueryBuilderPage);

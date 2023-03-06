@@ -4,7 +4,6 @@
 }
 .QueryBuilder .rules-wrap {
   position: relative;
-  padding: 10px;
   padding-bottom: 6px;
   border: 1px solid var(--border-color);
   background: var(--foreground-color);

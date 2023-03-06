@@ -18,9 +18,9 @@ const QueryExecutor = (props) => {
               { query.description && <p className="queryDesc flex-100 font14 padd10px">{ query.description }</p> }
             </div>
             <div className="queryAction flex-33 layout-row layout-wrap layout-align-end-end">
-              <Button type="primary" onClick={() => setCollapseOpen(!isCollapseOpen)}>Execute Query</Button>
-              <Button type="primary" className="sideMargin5px" onClick={() => handleUpdateQuery(query)}>Update Query</Button>
-              <Button type="danger" onClick={() => handleDeleteQuery(query)}>Delete</Button>
+              <Button type="primary" className="margin5" onClick={() => setCollapseOpen(!isCollapseOpen)}>Execute Query</Button>
+              <Button type="primary" className="margin5" onClick={() => handleUpdateQuery(query)}>Update Query</Button>
+              <Button type="danger" className="margin5" onClick={() => handleDeleteQuery(query)}>Delete</Button>
             </div>
           </div>
         </div>
