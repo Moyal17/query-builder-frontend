@@ -1,6 +1,6 @@
 import localStorage from 'local-storage';
 import { apiMethods, publicClientConfig } from '../../services/apiService';
-import { actionTypes } from './actionTypes';
+import actionTypes from '../actions/actionTypes';
 import { handleErrorResponse } from './index';
 
 export const saveUserToken = (res) => {
@@ -29,9 +29,6 @@ export const saveUserCredentials = (res) => {
 export const loginUser = body => async (dispatch) => {
   try {
     const data = await apiMethods.users.login(body);
-    if (data.user.userType === 'TRAINER') {
-      data.user.profession = true; // for now
-    }
     dispatch(saveUserCredentials(data));
     return data;
   } catch (e) {

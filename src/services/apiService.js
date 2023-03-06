@@ -36,36 +36,38 @@ publicClient.interceptors.response.use((response) => {
 
 const apiMethods = {
   users: {
-    verifyUser (query) {
-      const api = '/public/users/verifyEmail';
-      return publicClient.get(query ? (api + query) : api, publicClientConfig);
+    register: body => publicClient.post('/public/users/register', body, publicClientConfig),
+    login: body => publicClient.post('/public/users/login', body, publicClientConfig),
+    logout: () => {
+      localStorage.remove('qb-auth');
     },
   },
-  queries: {
+  movies: {
     getMovies (query) {
       const api = '/public/articles/getFilteredArticles';
       return publicClient.get(query ? (api + query) : api, publicClientConfig);
     },
-    searchInBlog (query) {
-      const api = '/public/articles/searchInBlog';
+  },
+  queries: {
+    getUserQueries (query) {
+      const api = '/public/user/getUserQueries';
       return publicClient.get(query ? (api + query) : api, publicClientConfig);
     },
-    getBlogCategories () {
-      return publicClient.get('/public/articles/getBlogCategories', publicClientConfig);
+    executeQuery (query) {
+      const api = '/public/articles/getFilteredArticles';
+      return publicClient.get(query ? (api + query) : api, publicClientConfig);
     },
-    getArticle (uri) {
-      return publicClient.get(`/public/articles/getArticleDetails/${uri}`, publicClientConfig);
+    createQuery (body) {
+      return publicClient.post('/public/queries/createQuery', body , publicClientConfig);
     },
-    getArticlesByTrainer (id) {
-      return publicClient.get(`/public/articles/getArticlesByTrainer/${id}`, publicClientConfig);
+    updateQuery (body) {
+      return publicClient.put('/public/queries/updateQuery', body , publicClientConfig);
     },
-    getArticlesForTrainerProfile (id) {
-      return publicClient.get(`/public/articles/getArticlesForTrainerProfile/${id}`, publicClientConfig);
+    removeQuery (query) {
+      const api = '/public/queries/removeQuery';
+      return publicClient.delete(query ? (api + query) : api, publicClientConfig);
     },
-    getArticlesByCategory (uri) {
-      return publicClient.get(`/public/articles/getArticlesByCategory/${uri}`, publicClientConfig);
-    }
   }
 };
 
-export { apiMethods, publicClient, publicClientConfig };
+export { apiMethods, publicClientConfig };

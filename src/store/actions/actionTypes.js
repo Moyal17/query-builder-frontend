@@ -1,6 +1,6 @@
 /* eslint-disable no-trailing-spaces */
 
-export const actionTypes = {
+const actionTypes = {
   HANDLE_SUCCESS_RESPONSE: 'HANDLE_SUCCESS_RESPONSE',
   HANDLE_ERROR_RESPONSE: 'HANDLE_ERROR_RESPONSE',
   SAVE_USER_CREDENTIALS: 'SAVE_USER_CREDENTIALS',
@@ -8,4 +8,9 @@ export const actionTypes = {
   CLEAR_QUERIES: 'CLEAR_QUERIES',
   SET_QUERY_DATA: 'SET_QUERY_DATA',
   CLEAR_QUERY_DATA: 'CLEAR_QUERY_DATA',
+
+  HANDLE_USER_QUERIES: 'HANDLE_USER_QUERIES'
 };
+
+
+export default actionTypes

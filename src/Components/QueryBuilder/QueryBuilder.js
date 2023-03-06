@@ -3,6 +3,7 @@ import RuleList from './ruleList.js';
 import { Row } from 'antd';
 import ReactJson from 'react-json-view'
 import { randomizeId } from '../../services/utilsService';
+import './QueryBuilder.css'
 
 const rules = [{
   condition: 'AND',
@@ -175,7 +176,7 @@ class QueryBuilder extends Component {
   }
 
   render() {
-    return <div className="wrap">
+    return <div className="QueryBuilder wrap">
       <RuleList
         rules={this.state.rules}
         fields={[...fields]}
@@ -191,12 +192,9 @@ class QueryBuilder extends Component {
         getFieldsType={(id) => this.getFieldsType(id)}
         handleDeleteRule={(id) => this.handleDeleteRule(id)}
       />
-      <Row>
-        <ReactJson src={this.state.rules} theme="twilight" enableClipboard={false} collapsed indentWidth={2}/>
-      </Row>
-      <Row className="jsonStringContainer">
+      <div className="flex-100 layout-row layout-wrap layout-align-start-start padd10 jsonStringContainer">
          <pre>{JSON.stringify(this.state.rules,null,2)}</pre>
-      </Row>
+      </div>
     </div>;
   }
 }

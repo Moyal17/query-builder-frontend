@@ -1,0 +1,125 @@
+
+.QueryBuilder.wrap {
+  padding: 15px;
+}
+.QueryBuilder .rules-wrap {
+  position: relative;
+  padding: 10px;
+  padding-bottom: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--foreground-color);
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.QueryBuilder .rules-wrap .id-wrap {
+  width: 200px;
+}
+.QueryBuilder .rules-wrap .value-select-wrap {
+  width: 186.5px;
+}
+.QueryBuilder .rules-wrap .operator-wrap {
+  width: 180px;
+}
+.QueryBuilder .rules-wrap .value-wrap {
+  width: 300px;
+}
+.QueryBuilder .rules-wrap .rules-header {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.QueryBuilder .rules-wrap .select  {
+  width: 100%;
+}
+.QueryBuilder .rules-wrap .ctl-wrap {
+  text-align: right;
+}
+.QueryBuilder .rules-wrap .ctl-wrap button {
+  margin: 0 0 0 5px;
+}
+
+.ant-row {
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid var(--border-color);
+  margin: 0 0 10px 0;
+}
+input,.ant-input,.QueryBuilder .rules-wrap .ant-select-single:not(.ant-select-customize-input) .ant-select-selector,.QueryBuilder .rules-wrap .ant-picker {
+  border: 1px solid var(--border-color);
+  height: 40px;
+  background-color: var(--border-color);
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-weight: 100;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.QueryBuilder .rules-wrap .ant-btn,.QueryBuilder .rules-wrap .ant-radio-button-wrapper {
+  height: 40px;
+  font-size: 16px;
+}
+.QueryBuilder .rules-wrap .ant-btn {
+  border-radius: 5px;
+}
+
+.QueryBuilder .rules-wrap .ant-radio-button-wrapper {
+  padding: 4px 15px;
+  color: #7b7b7bd9;
+  background: #323232;
+  border: 1px solid #323232;
+}
+.QueryBuilder .rules-wrap .ant-radio-button-wrapper:first-child,
+.ant-radio-button-wrapper:last-child {
+  border-left: 1px solid #323232;
+}
+.ant-radio-button-wrapper:first-child, .ant-radio-group-solid .ant-radio-button-wrapper:first-child .ant-radio-button.ant-radio-button-checked {
+  border-radius: 5px 0 0 5px;
+}
+.ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper:first-child {
+  border-right-color: #323232;
+}
+.ant-radio-button-wrapper:last-child, .ant-radio-group-solid .ant-radio-button-wrapper:last-child .ant-radio-button.ant-radio-button-checked {
+  border-radius: 0 5px 5px 0;
+}
+.QueryBuilder .rules-wrap .ant-radio-button-wrapper:not(:first-child)::before {
+  background-color: #323232;
+}
+.QueryBuilder .rules-wrap .ant-select-single {
+
+}
+.QueryBuilder .rules-wrap .ant-select-single:not(.ant-select-customize-input) .ant-select-selector,.QueryBuilder .rules-wrap .ant-picker {
+  line-height: 20px;
+}
+
+.QueryBuilder .rules-wrap .ant-rate-star-first,.QueryBuilder .rules-wrap .ant-rate-star-second {
+  color: #b4b4b4;
+}
+
+.QueryBuilder .rules-wrap .ant-rate {
+  min-width: 170px;
+  padding: 0px 5px;
+}
+.rule-container .ant-col {
+  display: inline-grid;
+  align-items: end;
+}
+.small-title {
+  width: 100%;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.QueryBuilder .rules-wrap .ant-picker {
+  width: 190px;
+}
+
+.ant-radio-group-solid .ant-radio-button.ant-radio-button-checked {
+  color: #fff;
+  background: var(--ant-primary-color);
+  border-color: var(--ant-primary-color);
+}
+.QueryBuilder .rules-wrap .ant-radio-button-wrapper {
+  color: #fff;
+}
+

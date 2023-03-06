@@ -161,7 +161,7 @@
   cursor: not-allowed;
 }
 .ant-select-multiple.ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  background: #141414;
+  background: var(--foreground-color);
 }
 .ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector input {
   cursor: not-allowed;
@@ -279,7 +279,7 @@
   line-height: 1;
   text-align: center;
   text-transform: none;
-  background: #141414;
+  background: var(--foreground-color);
   cursor: pointer;
   opacity: 0;
   transition: color 0.3s ease, opacity 0.15s ease;
@@ -392,7 +392,7 @@
   cursor: not-allowed;
 }
 .ant-select-item-option-disabled.ant-select-item-option-selected {
-  background-color: #141414;
+  background-color: var(--foreground-color);
 }
 .ant-select-item-option-grouped {
   padding-left: 24px;
@@ -525,7 +525,7 @@
   line-height: 1.5715;
   list-style: none;
   font-feature-settings: 'tnum';
-  background: #141414;
+  background: var(--foreground-color);
 }
 .ant-picker-calendar-header {
   display: flex;
@@ -543,7 +543,7 @@
   margin-left: 8px;
 }
 .ant-picker-calendar .ant-picker-panel {
-  background: #141414;
+  background: var(--foreground-color);
   border: 0;
   border-top: 1px solid #303030;
   border-radius: 0;
@@ -583,7 +583,7 @@
   display: block;
   width: 100%;
   text-align: right;
-  background: #141414;
+  background: var(--foreground-color);
   border: 0;
 }
 .ant-picker-calendar-full .ant-picker-panel .ant-picker-body th,
@@ -919,7 +919,7 @@ textarea.ant-picker-input > input {
   right: 0;
   color: rgba(255, 255, 255, 0.3);
   line-height: 1;
-  background: #141414;
+  background: var(--foreground-color);
   transform: translateY(-50%);
   cursor: pointer;
   opacity: 0;
