@@ -9,16 +9,16 @@ const rules = [{
   rules: [{
     id: 3,
     fieldName: 'budget',
-    operator: 'equal',
-    value: 9
+    operator: 'greaterEqual',
+    value: 55000000
   }, {
     condition: 'or',
     id: 9,
     rules: [{
       id: 4,
-      fieldName: 'overview',
-      operator: 'lessEqual',
-      value: 2
+      fieldName: 'popularity',
+      operator: 'greater',
+      value: 80
     }]
   }]
 }];
@@ -75,18 +75,21 @@ class QueryBuilder extends Component {
     const obj = [...fields].find(item => item.id === id);
     return obj['type'] ? obj['type'] : ''
   }
+
   generateKey (rules) {
     rules.forEach(item => {
       item.key = randomizeId()
       if (item.rules) this.generateKey(item.rules)
     })
   }
+
   updateRules () {
     this.setState({
       rules: this.state.rules
     })
     this.props.handleChange(this.state.rules);
   }
+
   findRulesById (rules, id, callback) {
     rules.forEach((item, index) => {
       if (item.id === id) {
@@ -148,6 +151,7 @@ class QueryBuilder extends Component {
     })
     this.updateRules()
   }
+
   handleDeleteGroup (id) {
     this.findRulesById(this.state.rules, id, (item, itemRules, itemIndex) => {
       itemRules.splice(itemIndex, 1)
@@ -171,6 +175,7 @@ class QueryBuilder extends Component {
     })
     this.updateRules();
   }
+
   handleChangedValue (key, val) {
     this.findRulesByKey(this.state.rules, key, (item) => {
       if (Number(val)) item.value = Number(val);
@@ -180,7 +185,7 @@ class QueryBuilder extends Component {
   }
 
   render() {
-    return <div className="QueryBuilder flex-100 layout-row layout-wrap layout-align-start padd15">
+    return <div className="QueryBuilder flex-100 layout-row layout-wrap layout-align-start">
       <RuleList
         rules={this.state.rules}
         fields={[...fields]}
@@ -197,9 +202,7 @@ class QueryBuilder extends Component {
         getOperatorType={(id) => this.getOperatorType(id)}
         handleDeleteRule={(id) => this.handleDeleteRule(id)}
       />
-
-
-      <div className="flex-100 layout-row layout-wrap layout-align-start-start padd10 jsonStringContainer">
+      <div className="flex-100 layout-row layout-wrap layout-align-start-start padd10 jsonStringContainer" style={{display: 'none'}}>
         <div className="flex-100 layout-row layout-wrap layout-align-start-start">
           <h3>Builder Output</h3>
         </div>

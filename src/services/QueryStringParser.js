@@ -47,13 +47,12 @@ const conditionLogic = (body, condition) => {
   }
 }
 
-const queryStringCipher = (arrayInput) => {
+const queryStringParser = (condition) => {
   let root = {};
-  const condition = arrayInput[0];
   const keyOp = conditionOp[condition.condition];
   root[keyOp] = [];
   conditionLogic(root[keyOp], condition);
   return root;
 }
 
-export default queryStringCipher;
+export default queryStringParser;

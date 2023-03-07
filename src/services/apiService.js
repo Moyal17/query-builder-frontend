@@ -1,7 +1,7 @@
 import axios from 'axios';
 import localStorage from 'local-storage';
 
-const token = localStorage.get('Aspire-auth') || null;
+const token = localStorage.get('queryBuilder-auth') || null;
 
 const publicClient = axios.create({
   baseURL: 'http://localhost:8082'
@@ -57,13 +57,13 @@ const apiMethods = {
       const api = '/public/queries/executeQuery';
       return publicClient.get(query ? (api + query) : api, publicClientConfig);
     },
-    createQuery (body) {
+    create (body) {
       return publicClient.post('/public/queries/createQuery', body , publicClientConfig);
     },
-    updateQuery (body) {
+    update (body) {
       return publicClient.put('/public/queries/updateQuery', body , publicClientConfig);
     },
-    removeQuery (query) {
+    remove (query) {
       const api = '/public/queries/removeQuery';
       return publicClient.delete(query ? (api + query) : api, publicClientConfig);
     },

@@ -255,7 +255,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 15px 0;
 }
 
-.sidePadd5px {
+.side-padd-5 {
   padding: 0 5px;
 }
 
@@ -309,4 +309,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .cardContainer {
   margin-bottom: 15px;
+}
+
+.react-json-view {
+  overflow-y: auto;
+  max-height: 200px;
 }

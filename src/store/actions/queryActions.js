@@ -31,20 +31,16 @@ export const getUserQueries = () => async (dispatch) => {
 
 export const createQuery = body => async (dispatch) => {
   try {
-    const data = await apiMethods.queries.create(body);
-    dispatch(handleSuccessResponse(data));
-    return data;
+    return await apiMethods.queries.create(body);
   } catch (e) {
     dispatch(handleErrorResponse(e));
     return false;
   }
 };
 
-export const editQuery = body => async (dispatch) => {
+export const updateQuery = body => async (dispatch) => {
   try {
-    const data = await apiMethods.queries.edit(body);
-    dispatch(handleSuccessResponse(data));
-    return data;
+    return await apiMethods.queries.update(body);
   } catch (e) {
     dispatch(handleErrorResponse(e));
     return false;

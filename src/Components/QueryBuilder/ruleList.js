@@ -1,9 +1,8 @@
 import React, {Fragment} from "react";
-import {DatePicker, Button, Select, Radio, Rate, Input} from 'antd';
+import {DatePicker, Button, Select, Radio, Input} from 'antd';
 
 const {Option} = Select;
 const {RangePicker} = DatePicker;
-
 
 const ValueField = ({ getOperatorVisible, handleChangedValue, getOperatorType, ruleItem }) => {
   return (
@@ -23,7 +22,7 @@ const ValueField = ({ getOperatorVisible, handleChangedValue, getOperatorType, r
 const RuleList = (props) => {
   return (
     <div className="width100 flex-100 layout-row layout-wrap layout-align-start-end">
-    {props.rules.map((item) => (
+    { props.rules.map((item) => (
       <Fragment key={item.key}>
         {item['condition'] ? <div className="rules-wrap flex-100 layout-row layout-wrap layout-align-start padd15">
           <div className="rules-header flex-100 layout-row layout-wrap layout-align-start-start">
@@ -45,9 +44,9 @@ const RuleList = (props) => {
               </div>
             </div>
           </div>
-          <div className="rules-body">
-            <div key={item.key} className="rules-list">
-              {item.rules ? item.rules.map(ruleItem => (
+          <div className="rules-body flex-100 layout-row layout-wrap layout-align-start">
+            <div key={item.key} className="rules-list flex-100 layout-row layout-wrap layout-align-start">
+              {item.rules && item.rules.length > 0 ? item.rules.map(ruleItem => (
                 <Fragment key={ruleItem.key}>
                   { !ruleItem["condition"] ? <div className="rule-container flex-100 layout-row layout-wrap layout-align-start-start marginBottom10px">
                     <div className="flex-100 layout-row layout-wrap layout-align-start-end">

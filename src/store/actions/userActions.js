@@ -6,7 +6,7 @@ import { handleErrorResponse } from './index';
 export const saveUserToken = (res) => {
   if (res.token) {
     publicClientConfig.headers.Authorization = res.token;
-    localStorage.set('Aspire-auth', res.token);
+    localStorage.set('queryBuilder-auth', res.token);
   }
   return {
     type: actionTypes.HANDLE_SUCCESS_RESPONSE,
@@ -17,7 +17,7 @@ export const saveUserToken = (res) => {
 export const saveUserCredentials = (res) => {
   if (res.token) {
     publicClientConfig.headers.Authorization = res.token;
-    localStorage.set('Aspire-auth', res.token);
+    localStorage.set('queryBuilder-auth', res.token);
   }
   return {
     type: actionTypes.HANDLE_SUCCESS_RESPONSE,
