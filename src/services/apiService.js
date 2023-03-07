@@ -38,10 +38,6 @@ const apiMethods = {
   users: {
     register: body => publicClient.post('/public/users/register', body, publicClientConfig),
     login: body => publicClient.post('/public/users/login', body, publicClientConfig),
-    getUserQueries (query) {
-      const api = '/public/users/getUserQueries';
-      return publicClient.get(query ? (api + query) : api, publicClientConfig);
-    },
     logout: () => {
       localStorage.remove('qb-auth');
     },
@@ -53,6 +49,10 @@ const apiMethods = {
     },
   },
   queries: {
+    getUserQueries (query) {
+      const api = '/public/users/getUserQueries';
+      return publicClient.get(query ? (api + query) : api, publicClientConfig);
+    },
     executeQuery (query) {
       const api = '/public/queries/executeQuery';
       return publicClient.get(query ? (api + query) : api, publicClientConfig);

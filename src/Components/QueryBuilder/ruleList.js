@@ -38,19 +38,20 @@ const RuleList = (props) => {
                         <div className="id-wrap">
                           <p className="small-title">Field Name</p>
                           <Select onChange={(val) => props.handleChangedField(ruleItem.key, val)} className="select" value={ruleItem.id}>
-                            { props.fields ? props.fields.map(fieldItem => (<Option key={fieldItem.id} value={fieldItem.id}>{fieldItem.name}</Option>)) : null}
+                            { props.fields ? props.fields.map(fieldItem => (<Option key={`${fieldItem.name}_${fieldItem.id}`} value={fieldItem.id}>{fieldItem.name}</Option>)) : null}
                           </Select>
                         </div>
                       </div>
                       <div className="flex-initial layout-row layout-wrap layout-align-start-start sidePadd5px">
                         <div className="operator-wrap">
                           <p className="small-title">Operator</p>
-                          <Select onChange={(val) => props.handleChangedOperator(ruleItem.key, val)} className="select" value={ruleItem.operator}>
-                            { props.operators ? props.operators.map(operatorItem => (
-                                <Option key={operatorItem.id} value={operatorItem.symbol}>{operatorItem.name}</Option>
-                              )) : null
-                            }
-                          </Select>
+                          { props.operators && props.operators.length > 0 && (
+                            <Select onChange={(val) => props.handleChangedOperator(ruleItem.key, val)} className="select" value={ruleItem.operator}>
+                              { props.operators.map(operatorItem => (
+                                <Option key={`${operatorItem.symbol}_${operatorItem.id}`} value={operatorItem.symbol}>{operatorItem.name}</Option>
+                              ))}
+                            </Select>
+                          )}
                         </div>
                       </div>
                       { props.getOperatorVisible(ruleItem.operator) ?
@@ -58,11 +59,10 @@ const RuleList = (props) => {
                           <p className="small-title">Value</p>
                           { props.getOperatorType(ruleItem.operator) === 'Date' ? <DatePicker onChange={(val, dateString) => props.handleChangedValue(ruleItem.key, dateString)}/> : null}
                           { props.getOperatorType(ruleItem.operator) === 'Range' ? <RangePicker onChange={(val, dateString) => props.handleChangedValue(ruleItem.key, dateString)}/> : null}
-                          { props.getOperatorType(ruleItem.operator) === 'Category' ?
+                        {/*  { props.getOperatorType(ruleItem.operator) === 'Category' ?
                             <div className="value-select-wrap"><Select className="select" onChange={(val) => props.handleChangedValue(ruleItem.key, val)}>
                               {ruleItem.categoryList ? ruleItem.categoryList.map(categoryItem => (<Option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</Option>)) : null}
-                            </Select></div> : null}
-                          { props.getOperatorType(ruleItem.operator) === 'Rate' ? <Rate onChange={(val) => props.handleChangedValue(ruleItem.key, val)}/> : null}
+                            </Select></div> : null}*/}
                           {(props.getOperatorType(ruleItem.operator) === 'String') || (props.getOperatorType(ruleItem.operator) === 'Number') ? <Input type={props.getOperatorType(ruleItem.operator)} onChange={(e) => props.handleChangedValue(ruleItem.key, e.target.value)} defaultValue={ruleItem.value}/> : null}
                         </div> : null}
                       {item.rules.length > 1 ?

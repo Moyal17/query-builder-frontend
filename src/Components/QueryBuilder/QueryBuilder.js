@@ -24,18 +24,15 @@ const rules = [{
 }];
 
 const fields = [
-  { id: 1, name: "Movie Id", fieldName: 'movie_id', type: 'String' },
-  { id: 2, name: "Title", fieldName: 'title' , type: 'String' },
-  { id: 3, name: "Budget",fieldName: 'budget' , type: 'Number' },
-  { id: 4, name: "Overview", fieldName: 'overview' , type: 'String' },
-  { id: 5, name: "Release Date", fieldName: 'release_date', type: "Date" },
-  { id: 6, name: "Revenue", fieldName: 'revenue' , type: 'Number' },
-  { id: 8, name: "Runtime", fieldName: 'runtime' , type: 'Number' },
-  { id: 9, name: "Rate", fieldName: 'movie_id', type: "Rate" },
-  { id: 7, name: "Release Range", fieldName: 'release_date', type: "Range" },
-  { id: 10, name: "Category", fieldName: 'movie_id', type: "Category",
-    categoryList: [{id: 100, name: 'toms', fieldName: 'toms'}, {id: 101, name: 'jerry', fieldName: 'jerry'}]
-  },
+  { id: 1, name: "Movie Id", fieldName: 'movie_id'},
+  { id: 2, name: "Title", fieldName: 'title' },
+  { id: 3, name: "Budget",fieldName: 'budget' },
+  { id: 4, name: "Overview", fieldName: 'overview' },
+  { id: 5, name: "Release Date", fieldName: 'release_date' },
+  { id: 6, name: "Revenue", fieldName: 'revenue' },
+  { id: 8, name: "Runtime", fieldName: 'runtime' },
+  { id: 9, name: "popularity", fieldName: 'popularity' },
+  { id: 10, name: "Release Range", fieldName: 'release_date'}
 ];
 
 const operators = [
