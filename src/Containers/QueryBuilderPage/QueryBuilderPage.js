@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+import ReactJson from 'react-json-view'
 import { getUserQueries, getMovies } from '../../store/actions';
 import QueryBuilder from "../../Components/QueryBuilder/QueryBuilder";
 import QueryExecutor from "../../Components/QueryExecutor/QueryExecutor";
+import QueryStringCipher from "../../Components/QueryBuilder/QueryStringCipher";
 import 'antd/dist/antd.less';
 
 class QueryBuilderPage extends Component {
@@ -64,6 +66,7 @@ class QueryBuilderPage extends Component {
           }
         }
         ],
+      queryOutput: null,
     };
   }
 
@@ -77,19 +80,28 @@ class QueryBuilderPage extends Component {
     }
   }
 
-  handleQueryResult() {
-
+  handleQueryResult(query) {
+    const data = QueryStringCipher(query);
+    console.log('QueryStringCipher: ', data)
+    this.setState({ queryOutput: data})
   }
 
   render() {
-    const { queryList } = this.state;
+    const { queryList, queryOutput } = this.state;
     return (
       <main id="main">
         <div className="flex-100 layout-row layout-wrap layout-align-center padd15 text-center">
           <h1 className="flex-100 layout-row layout-align-center">Query Builder Page</h1>
           <Link to={'/'}>Home</Link>
         </div>
-        <QueryBuilder queryResult={(query) => {this.handleQueryResult(query)}}/>
+        <QueryBuilder handleChange={(query) => {this.handleQueryResult(query)}}/>
+        <div className="flex-100 layout-row layout-wrap layout-align-start-start padd15">
+          <div className="flex-100 layout-row layout-wrap layout-align-start-start">
+            <h2>Query Output</h2>
+          </div>
+          <ReactJson src={queryOutput} theme="twilight" enableClipboard={false} displayObjectSize={false}/>
+        </div>
+
         <div className="flex-100 layout-row layout-wrap layout-align-start-start padd15">
           <div className="flex-100 layout-row layout-wrap layout-align-start-start">
             <h2>Your queries</h2>

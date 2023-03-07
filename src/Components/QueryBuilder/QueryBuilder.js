@@ -4,53 +4,51 @@ import { randomizeId } from '../../services/utilsService';
 import './QueryBuilder.css'
 
 const rules = [{
-  condition: 'AND',
+  condition: 'and',
   id: 0,
   rules: [{
     id: 3,
-    field: 'budget',
-    operator: '=',
+    fieldName: 'budget',
+    operator: 'equal',
     value: 9
   }, {
-    condition: 'OR',
+    condition: 'or',
     id: 9,
     rules: [{
       id: 4,
-      field: 'overview',
-      operator: '>=',
-      value: 'JAPAN'
+      fieldName: 'overview',
+      operator: 'lessEqual',
+      value: 2
     }]
   }]
 }];
 
 const fields = [
-  { id: 1, name: "Movie Id", field: 'movie_id', type: 'String' },
-  { id: 2, name: "Title", field: 'title' , type: 'String' },
-  { id: 3, name: "Budget",field: 'budget' , type: 'Number' },
-  { id: 4, name: "Overview", field: 'overview' , type: 'String' },
-  { id: 5, name: "Release Date", field: 'release_date', type: "Date" },
-  { id: 6, name: "Revenue", field: 'revenue' , type: 'Number' },
-  { id: 8, name: "Runtime", field: 'runtime' , type: 'Number' },
-  { id: 9, name: "Rate", field: 'movie_id', type: "Rate" },
-  { id: 7, name: "Release Range", field: 'release_date', type: "Range" },
-  { id: 10, name: "Category", field: 'movie_id', type: "Category",
-    categoryList: [{id: 100, name: 'toms', field: 'toms'}, {id: 101, name: 'jerry', field: 'jerry'}]
+  { id: 1, name: "Movie Id", fieldName: 'movie_id', type: 'String' },
+  { id: 2, name: "Title", fieldName: 'title' , type: 'String' },
+  { id: 3, name: "Budget",fieldName: 'budget' , type: 'Number' },
+  { id: 4, name: "Overview", fieldName: 'overview' , type: 'String' },
+  { id: 5, name: "Release Date", fieldName: 'release_date', type: "Date" },
+  { id: 6, name: "Revenue", fieldName: 'revenue' , type: 'Number' },
+  { id: 8, name: "Runtime", fieldName: 'runtime' , type: 'Number' },
+  { id: 9, name: "Rate", fieldName: 'movie_id', type: "Rate" },
+  { id: 7, name: "Release Range", fieldName: 'release_date', type: "Range" },
+  { id: 10, name: "Category", fieldName: 'movie_id', type: "Category",
+    categoryList: [{id: 100, name: 'toms', fieldName: 'toms'}, {id: 101, name: 'jerry', fieldName: 'jerry'}]
   },
 ];
 
 const operators = [
-  { id: 1, name: 'equal', symbol: '=' },
-  { id: 2, name: 'not equal', symbol: '!=' },
-  { id: 3, name: 'is not null', value: 'disabled', symbol: 'is not null' },
-  { id: 4, name: 'is null', value: 'disabled', symbol: 'is null' },
-  { id: 5, name: 'in', symbol: 'in' },
-  { id: 6, name: 'not in', symbol: 'not in' },
-  { id: 7, name: 'less', symbol: '>' },
-  { id: 8, name: 'less or equal', symbol: '>=' },
-  { id: 9, name: 'greater', symbol: '<' },
-  { id: 10, name: 'greater or equal', symbol: '<=' },
-  { id: 11, name: 'between', symbol: 'between' },
-  { id: 12, name: 'not between', symbol: 'not between' }
+  { id: 1, name: 'equal', symbol: 'equal', type: 'String' },
+  { id: 2, name: 'not equal', symbol: 'notEqual', type: 'String' },
+  { id: 3, name: 'is not null', value: 'disabled', symbol: 'isNotNull' },
+  { id: 4, name: 'is null', value: 'disabled', symbol: 'isNull' },
+  { id: 7, name: 'less', symbol: 'less', type: 'Number' },
+  { id: 8, name: 'less or equal', symbol: 'lessEqual', type: 'Number' },
+  { id: 9, name: 'greater', symbol: 'greater', type: 'Number' },
+  { id: 10, name: 'greater or equal', symbol: 'greaterEqual', type: 'Number' },
+  { id: 11, name: 'between', symbol: 'between', type: "Range" },
+  { id: 12, name: 'not between', symbol: 'notBetween', type: "Range" }
 ];
 
 class QueryBuilder extends Component {
@@ -62,10 +60,20 @@ class QueryBuilder extends Component {
     this.generateKey([...rules]);
   }
 
+  componentDidMount() {
+
+  }
+
   getOperatorVisible (id) {
     const arr = [...operators].filter(item => item.value === 'disabled').map(item => item.symbol)
     return !arr.includes(id)
   }
+
+  getOperatorType (operator) {
+    const obj = [...operators].find(item => item.symbol === operator);
+    return obj['type'] ? obj['type'] : ''
+  }
+
   getFieldsType (id) {
     const obj = [...fields].find(item => item.id === id);
     return obj['type'] ? obj['type'] : ''
@@ -80,7 +88,7 @@ class QueryBuilder extends Component {
     this.setState({
       rules: this.state.rules
     })
-    // this.props.handleChange(this.state.rules);
+    this.props.handleChange(this.state.rules);
   }
   findRulesById (rules, id, callback) {
     rules.forEach((item, index) => {
@@ -100,7 +108,7 @@ class QueryBuilder extends Component {
 
   handleCondition (id) {
     this.findRulesById(this.state.rules, id, (item) => {
-      item.condition = item.condition === "AND" ? "OR" : "AND";
+      item.condition = item.condition === "and" ? "or" : "and";
     })
     this.updateRules()
   }
@@ -110,7 +118,7 @@ class QueryBuilder extends Component {
       item.rules.push({
         id: [...fields][0].id,
         operator: [...operators][0].symbol,
-        field: [...fields][0].field,
+        fieldName: [...fields][0].fieldName,
         value: '',
         key: randomizeId()
       })
@@ -128,14 +136,14 @@ class QueryBuilder extends Component {
   handleAddGroup (id) {
     this.findRulesById(this.state.rules, id, (item) => {
       item.rules.push({
-        condition: 'OR',
+        condition: 'or',
         groupLvl: item.rules.length + 1,
         id: Number.parseInt(Math.random() * 1000),
         key: randomizeId(),
         rules: [{
           id: [...fields][0].id,
           key: randomizeId(),
-          field: [...fields][0].field,
+          fieldName: [...fields][0].fieldName,
           operator: [...operators][0].symbol,
           value: ''
         }]
@@ -154,7 +162,7 @@ class QueryBuilder extends Component {
     this.findRulesByKey(this.state.rules, key, (currentItem) => {
       currentItem.id = id;
       const obj = [...fields].find(fieldItem => fieldItem.id === currentItem.id);
-      currentItem.field = obj.field;
+      currentItem.fieldName = obj.fieldName;
       if (obj) currentItem.categoryList = obj.categoryList;
     })
     this.updateRules();
@@ -168,7 +176,8 @@ class QueryBuilder extends Component {
   }
   handleChangedValue (key, val) {
     this.findRulesByKey(this.state.rules, key, (item) => {
-      item.value = val;
+      if (Number(val)) item.value = Number(val);
+      else item.value = val;
     })
     this.updateRules();
   }
@@ -188,6 +197,7 @@ class QueryBuilder extends Component {
         handleChangedOperator={(key, val) => this.handleChangedOperator(key, val)}
         handleChangedValue={(key, val) => this.handleChangedValue(key, val)}
         getFieldsType={(id) => this.getFieldsType(id)}
+        getOperatorType={(id) => this.getOperatorType(id)}
         handleDeleteRule={(id) => this.handleDeleteRule(id)}
       />
       <div className="flex-100 layout-row layout-wrap layout-align-start-start padd10 jsonStringContainer">

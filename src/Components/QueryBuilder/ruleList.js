@@ -14,8 +14,8 @@ const RuleList = (props) => {
               <div className="flex-50 layout-row layout-wrap layout-align-start-start">
                 <Radio.Group onChange={() => props.handleCondition(item.id)} value={item['condition']}
                              optionType="button" buttonStyle="solid">
-                  <Radio value="AND">AND</Radio>
-                  <Radio value="OR">OR</Radio>
+                  <Radio value="and">AND</Radio>
+                  <Radio value="or">OR</Radio>
                 </Radio.Group>
               </div>
               <div className="flex-50 layout-row layout-wrap layout-align-end-start">
@@ -32,7 +32,7 @@ const RuleList = (props) => {
             <div key={item.key} className="rules-list">
               {item.rules ? item.rules.map(ruleItem => (
                 <React.Fragment key={ruleItem.key}>
-                  {!ruleItem["condition"] ? <div className="rule-container flex-100 layout-row layout-wrap layout-align-start-start marginBottom10px">
+                  { !ruleItem["condition"] ? <div className="rule-container flex-100 layout-row layout-wrap layout-align-start-start marginBottom10px">
                     <div className="flex-100 layout-row layout-wrap layout-align-start-end">
                       <div className="flex-initial layout-row layout-wrap layout-align-start-start">
                         <div className="id-wrap">
@@ -53,17 +53,17 @@ const RuleList = (props) => {
                           </Select>
                         </div>
                       </div>
-                      {props.getOperatorVisible(ruleItem.operator) ?
+                      { props.getOperatorVisible(ruleItem.operator) ?
                         <div className="flex-initial layout-row layout-wrap layout-align-start-start">
                           <p className="small-title">Value</p>
-                          {props.getFieldsType(ruleItem.id) === 'Date' ? <DatePicker onChange={(val, dateString) => props.handleChangedValue(ruleItem.key, dateString)}/> : null}
-                          {props.getFieldsType(ruleItem.id) === 'Range' ? <RangePicker onChange={(val, dateString) => props.handleChangedValue(ruleItem.key, dateString)}/> : null}
-                          {props.getFieldsType(ruleItem.id) === 'Category' ?
+                          { props.getOperatorType(ruleItem.operator) === 'Date' ? <DatePicker onChange={(val, dateString) => props.handleChangedValue(ruleItem.key, dateString)}/> : null}
+                          { props.getOperatorType(ruleItem.operator) === 'Range' ? <RangePicker onChange={(val, dateString) => props.handleChangedValue(ruleItem.key, dateString)}/> : null}
+                          { props.getOperatorType(ruleItem.operator) === 'Category' ?
                             <div className="value-select-wrap"><Select className="select" onChange={(val) => props.handleChangedValue(ruleItem.key, val)}>
                               {ruleItem.categoryList ? ruleItem.categoryList.map(categoryItem => (<Option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</Option>)) : null}
                             </Select></div> : null}
-                          {props.getFieldsType(ruleItem.id) === 'Rate' ? <Rate onChange={(val) => props.handleChangedValue(ruleItem.key, val)}/> : null}
-                          {(props.getFieldsType(ruleItem.id) === 'String') || (props.getFieldsType(ruleItem.id) === 'Number') ? <Input onChange={(e) => props.handleChangedValue(ruleItem.key, e.target.value)} defaultValue={ruleItem.value}/> : null}
+                          { props.getOperatorType(ruleItem.operator) === 'Rate' ? <Rate onChange={(val) => props.handleChangedValue(ruleItem.key, val)}/> : null}
+                          {(props.getOperatorType(ruleItem.operator) === 'String') || (props.getOperatorType(ruleItem.operator) === 'Number') ? <Input type={props.getOperatorType(ruleItem.operator)} onChange={(e) => props.handleChangedValue(ruleItem.key, e.target.value)} defaultValue={ruleItem.value}/> : null}
                         </div> : null}
                       {item.rules.length > 1 ?
                         <div className="flex-initial layout-row layout-wrap layout-align-end-end sidePadd5px">
@@ -89,6 +89,7 @@ const RuleList = (props) => {
                   handleChangedValue={props.handleChangedValue}
                   getOperatorVisible={props.getOperatorVisible}
                   getFieldsType={props.getFieldsType}
+                  getOperatorType={props.getOperatorType}
                   handleDeleteRule={props.handleDeleteRule}
                 /> : null}
             </div>
