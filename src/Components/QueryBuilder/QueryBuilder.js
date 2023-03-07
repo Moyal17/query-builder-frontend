@@ -180,7 +180,7 @@ class QueryBuilder extends Component {
   }
 
   render() {
-    return <div className="QueryBuilder wrap">
+    return <div className="QueryBuilder flex-100 layout-row layout-wrap layout-align-start padd15">
       <RuleList
         rules={this.state.rules}
         fields={[...fields]}
@@ -197,6 +197,8 @@ class QueryBuilder extends Component {
         getOperatorType={(id) => this.getOperatorType(id)}
         handleDeleteRule={(id) => this.handleDeleteRule(id)}
       />
+
+
       <div className="flex-100 layout-row layout-wrap layout-align-start-start padd10 jsonStringContainer">
         <div className="flex-100 layout-row layout-wrap layout-align-start-start">
           <h3>Builder Output</h3>

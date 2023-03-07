@@ -72,8 +72,7 @@ class QueryBuilderPage extends Component {
 
   async componentDidMount () {
     try {
-      // const data = await this.props.getUserQueries();
-      const data = await this.props.getMovies();
+      const data = await this.props.getUserQueries();
       console.log('componentDidMount: ', data)
     } catch (e) {
       console.log('handle error');
@@ -104,7 +103,7 @@ class QueryBuilderPage extends Component {
 
         <div className="flex-100 layout-row layout-wrap layout-align-start-start padd15">
           <div className="flex-100 layout-row layout-wrap layout-align-start-start">
-            <h2>Your queries</h2>
+            <h2>Your Queries</h2>
           </div>
           { queryList && queryList.length > 0 && queryList.map((query) => (
           <QueryExecutor key={query.id} query={query}/>
