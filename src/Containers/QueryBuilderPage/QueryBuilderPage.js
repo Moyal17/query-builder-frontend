@@ -126,7 +126,7 @@ class QueryBuilderPage extends Component {
             </div>
           </div>
         </div>
-        <div className="flex-25 layout-row layout-wrap layout-align-start side-padd-5">
+        <div className="flex-25 layout-row layout-wrap layout-align-start side-padd-5px">
           <p className="small-title">Query Title*</p>
           <Input type="text" className="flex-100" onChange={(e) => this.handleInputChanged('title', e.target.value)} defaultValue={this.state.newQuery.title}/>
         </div>
@@ -139,14 +139,14 @@ class QueryBuilderPage extends Component {
   }
 
   render() {
-    const { queryList, queryOutput, isOutputVisible } = this.state;
+    const { queryList, newQuery, isOutputVisible } = this.state;
     return (
       <div className="flex-100 layout-row layout-wrap layout-align-start-start padd15">
         <div className="flex-100 layout-row layout-wrap layout-align-center padd15 text-center">
           <h1 className="flex-100 layout-row layout-align-center">Query Builder Page</h1>
           <Link to={'/'}>Home</Link>
         </div>
-        <div className="cardContainer flex-100 layout-row layout-wrap layout-align-start-start padd15">
+        <div className="card-container flex-100 layout-row layout-wrap layout-align-start-start padd15">
           <div className="flex-100 layout-row layout-wrap layout-align-start-start">
             <h2>Create a Query</h2>
           </div>
@@ -165,7 +165,7 @@ class QueryBuilderPage extends Component {
                 <div className="flex-100 layout-row layout-wrap layout-align-start-start">
                   <h2>Query Output</h2>
                 </div>
-                <ReactJson src={queryOutput} name="where" theme="twilight" enableClipboard={false} displayObjectSize={false}/>
+                <ReactJson src={newQuery.payload} name="where" theme="twilight" enableClipboard={false} displayObjectSize={false}/>
               </div>
             )}
         </div>

@@ -202,7 +202,7 @@ class QueryBuilder extends Component {
         getOperatorType={(id) => this.getOperatorType(id)}
         handleDeleteRule={(id) => this.handleDeleteRule(id)}
       />
-      <div className="flex-100 layout-row layout-wrap layout-align-start-start padd10 jsonStringContainer" style={{display: 'none'}}>
+      <div className="flex-100 layout-row layout-wrap layout-align-start-start padd-10 jsonStringContainer" style={{display: 'none'}}>
         <div className="flex-100 layout-row layout-wrap layout-align-start-start">
           <h3>Builder Output</h3>
         </div>

@@ -43,93 +43,19 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-color);
   font-weight: 500;
 }
-.react-json-view, .jsonStringContainer {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  background: #141414;
-  margin: 10px 0;
-  border-radius: 5px;
-}
 
-.jsonStringContainer {
-  overflow-y:auto;
-  max-height: 300px;
-}
-
-/* minimal layout */
+/* minimal layout in flex */
 .layout-row {
   display: flex;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
 }
-
 .layout-wrap {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-
-.layout-align-center, .layout-align-center-center, .layout-align-center-end, .layout-align-center-start, .layout-align-center-stretch  {
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-/*end items*/
-.layout-align-end, .layout-align-end-center, .layout-align-end-end, .layout-align-end-start,.layout-align-end-stretch {
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end
-}
-/*around*/
-.layout-align-space-around, .layout-align-space-around-center, .layout-align-space-around-end, .layout-align-space-around-start .layout-align-space-around-stretch {
-  -webkit-justify-content: space-around;
-  -ms-flex-pack: distribute;
-  justify-content: space-around
-}
-/*between*/
-.layout-align-space-between, .layout-align-space-between-center, .layout-align-space-between-end, .layout-align-space-between-start ,.layout-align-space-between-stretch {
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between
-}
-/*start items*/
-.layout-align-center-start, .layout-align-end-start, .layout-align-space-around-start, .layout-align-space-between-start, .layout-align-start-start, .layout-align-start-stretch {
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start
-}
-/*center items*/
-.layout-align-center-center, .layout-align-end-center, .layout-align-space-around-center, .layout-align-space-between-center, .layout-align-start-center {
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  max-width: 100%;
-}
-/*end content*/
-.layout-align-center-end, .layout-align-end-end, .layout-align-space-around-end, .layout-align-space-between-end, .layout-align-start-end {
-  -webkit-align-items: flex-end;
-  -ms-flex-align: end;
-  align-items: flex-end
-}
-/*stretch content*/
-.layout-align-start, .layout-align-start-center, .layout-align-start-end, .layout-align-start-start, .layout-align-start-stretch {
-  -webkit-justify-content: start;
-  -ms-flex-pack: start;
-  justify-content: start;
-}
-/*stretch items*/
-.layout-align-center-stretch, .layout-align-end-stretch, .layout-align-space-around-stretch, .layout-align-space-between-stretch, .layout-align-start-stretch {
-  -webkit-align-items: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-align-content: stretch;
-  -ms-flex-line-pack: stretch;
-  align-content: stretch;
-}
-
-
 .flex {
   display: flex;
   -webkit-flex: 1;
@@ -141,14 +67,13 @@ h1, h2, h3, h4, h5, h6 {
   -ms-flex: 0 1 auto;
   flex: 0 1 auto
 }
-
 .flex-25 {
   display: flex;
   -webkit-flex: 0 0 25%;
   -ms-flex: 0 0 25%;
   flex: 0 0 25%
 }
-.layout-row > .flex-25 {
+.layout-row .flex-25 {
   -webkit-flex: 0 0 25%;
   -ms-flex: 0 0 25%;
   flex: 0 0 25%;
@@ -160,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
   -ms-flex: 0 0 50%;
   flex: 0 0 50%
 }
-.layout-row > .flex-50 {
+.layout-row .flex-50 {
   -webkit-flex: 0 0 50%;
   -ms-flex: 0 0 50%;
   flex: 0 0 50%;
@@ -182,38 +107,69 @@ h1, h2, h3, h4, h5, h6 {
 .width100 {
   width: 100%;
 }
-.layout-row > .flex-100 {
+.layout-row .flex-100 {
   -webkit-flex: 0 0 100%;
   -ms-flex: 0 0 100%;
   flex: 0 0 100%;
   max-width: 100%;
   max-height: 100%;
 }
-.layout-row > .flex-33 {
+.layout-row .flex-33 {
   -webkit-flex: 0 0 33.333%;
   -ms-flex: 0 0 33.333%;
   flex: 0 0 33.333%;
   max-width: 33.333%;
   max-height: 100%
 }
-.layout-row > .flex-66 {
+.layout-row .flex-66 {
   -webkit-flex: 0 0 66.666%;
   -ms-flex: 0 0 66.666%;
   flex: 0 0 66.666%;
   max-width: 66.666%;
   max-height: 100%
 }
-.content-start {
-  align-content: start;
-  -webkit-align-content: flex-start;
+.layout-align-center, .layout-align-center-center, .layout-align-center-end, .layout-align-center-start  {
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
-.content-center {
-  align-content: center;
-  -webkit-align-content: center;
+.layout-align-end, .layout-align-end-center, .layout-align-end-end, .layout-align-end-start {
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end
 }
-.alignSelf-stretch {
-  align-self: stretch;
+.layout-align-space-around, .layout-align-space-around-center, .layout-align-space-around-end, .layout-align-space-around-start {
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around
 }
+.layout-align-space-between, .layout-align-space-between-center, .layout-align-space-between-end, .layout-align-space-between-start {
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between
+}
+.layout-align-center-start, .layout-align-end-start, .layout-align-space-around-start, .layout-align-space-between-start, .layout-align-start-start {
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start
+}
+.layout-align-center-center, .layout-align-end-center, .layout-align-space-around-center, .layout-align-space-between-center, .layout-align-start-center {
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  max-width: 100%;
+}
+.layout-align-center-end, .layout-align-end-end, .layout-align-space-around-end, .layout-align-space-between-end, .layout-align-start-end {
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end
+}
+.layout-align-start, .layout-align-start-center, .layout-align-start-end, .layout-align-start-start {
+  -webkit-justify-content: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+}
+/* minimal layout in flex */
 
 .font12 {
   font-size: var(--font-size-12);
@@ -235,11 +191,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: var(--font-size-20);
 }
 
-.padd5 {
-  padding: 5px;
-}
-
-.padd10 {
+.padd-10 {
   padding: 10px;
 }
 
@@ -247,31 +199,19 @@ h1, h2, h3, h4, h5, h6 {
   padding: 15px;
 }
 
-.padd10px {
+.padd-10px {
   padding: 10px 0;
 }
 
-.padd15px {
-  padding: 15px 0;
-}
-
-.side-padd-5 {
+.side-padd-5px {
   padding: 0 5px;
 }
 
-.sidePadd10px {
-  padding: 0 10px;
-}
-
-.sidePadd15px {
+.side-padd-15px {
   padding: 0 15px;
 }
 
-.marginBottom5px {
-  margin-bottom: 5px;
-}
-
-.marginBottom10px {
+.margin-bottom-10px {
   margin-bottom: 10px;
 }
 
@@ -279,12 +219,8 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
-.margin5 {
+.margin-5 {
   margin: 5px;
-}
-
-.sideMargin5px {
-  margin: 0 5px;
 }
 
 .ReactCollapse--collapse {
@@ -301,17 +237,30 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 500px;
 }
 
-.cardContainer, .ReactCollapse--content {
+.card-container, .ReactCollapse--content {
   background-color: var(--foreground-color);
   border: 1px solid var(--border-color);
   border-radius: 5px;
 }
 
-.cardContainer {
+.card-container {
   margin-bottom: 15px;
 }
 
 .react-json-view {
   overflow-y: auto;
   max-height: 200px;
+}
+
+.react-json-view, .jsonStringContainer {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  background: #141414;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+.jsonStringContainer {
+  overflow-y:auto;
+  max-height: 300px;
 }

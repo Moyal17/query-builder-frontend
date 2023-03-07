@@ -31,17 +31,17 @@ const QueryExecutor = (props) => {
 
   return (
     <div className="QueryExecutor flex-100 layout-row layout-align-start-start">
-      <div className="cardContainer flex-100 layout-row layout-wrap layout-align-start-start padd10">
-        <div className="flex-100 layout-row layout-wrap layout-align-start-start padd10">
+      <div className="card-container flex-100 layout-row layout-wrap layout-align-start-start padd-10">
+        <div className="flex-100 layout-row layout-wrap layout-align-start-start padd-10">
           <div className="flex-100 layout-row layout-align-end-end">
             <div className="flex-66 layout-row layout-wrap layout-align-start-start">
               <label className="queryTitle flex-100 font16">{ query.title }</label>
-              { query.description && <p className="queryDesc flex-100 font14 padd10px">{ query.description }</p> }
+              { query.description && <p className="queryDesc flex-100 font14 padd-10px">{ query.description }</p> }
             </div>
             <div className="queryAction flex-33 layout-row layout-wrap layout-align-end-end">
-              <Button type="primary" className="margin5" onClick={() => executeQuery(query)}>Execute Query</Button>
-              <Button type="primary" className="margin5" onClick={() => handleUpdateQuery(query)}>Update Query</Button>
-              <Button type="danger" className="margin5" onClick={() => handleDeleteQuery(query)}>Delete</Button>
+              <Button type="primary" className="margin-5" onClick={() => executeQuery(query)}>Execute Query</Button>
+              <Button type="primary" className="margin-5" onClick={() => handleUpdateQuery(query)}>Update Query</Button>
+              <Button type="danger" className="margin-5" onClick={() => handleDeleteQuery(query)}>Delete</Button>
             </div>
           </div>
         </div>
@@ -50,9 +50,9 @@ const QueryExecutor = (props) => {
             <div className="flex-100 layout-row layout-wrap layout-align-start-start padd15">
               <div className="flex-100 layout-row layout-align-start-start">
                 {queryResponse && queryResponse.length > 0 &&
-                <div className="flex-initial layout-row layout-align-start-start marginBottom10px">
+                <div className="flex-initial layout-row layout-align-start-start margin-bottom-10px">
                   <label className="font14">{`Data Length: ${queryResponse && queryResponse.length} `}</label>
-                  <label className="font14 sidePadd15px">{`Model: ${query && query.model.toUpperCase()} `}</label>
+                  <label className="font14 side-padd-15px">{`Model: ${query && query.model.toUpperCase()} `}</label>
                 </div>
                 }
               </div>

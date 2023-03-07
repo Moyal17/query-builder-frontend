@@ -48,7 +48,7 @@ const RuleList = (props) => {
             <div key={item.key} className="rules-list flex-100 layout-row layout-wrap layout-align-start">
               {item.rules && item.rules.length > 0 ? item.rules.map(ruleItem => (
                 <Fragment key={ruleItem.key}>
-                  { !ruleItem["condition"] ? <div className="rule-container flex-100 layout-row layout-wrap layout-align-start-start marginBottom10px">
+                  { !ruleItem["condition"] ? <div className="rule-container flex-100 layout-row layout-wrap layout-align-start-start margin-bottom-10px">
                     <div className="flex-100 layout-row layout-wrap layout-align-start-end">
                       <div className="field-name flex-initial layout-row layout-wrap layout-align-start-start">
                         <div className="id-wrap">
@@ -58,7 +58,7 @@ const RuleList = (props) => {
                           </Select>
                         </div>
                       </div>
-                      <div className="field-operator flex-initial layout-row layout-wrap layout-align-start-start side-padd-5">
+                      <div className="field-operator flex-initial layout-row layout-wrap layout-align-start-start side-padd-5px">
                         <div className="operator-wrap">
                           <p className="small-title">Operator</p>
                           { props.operators && props.operators.length > 0 && (
@@ -78,7 +78,7 @@ const RuleList = (props) => {
                           ruleItem={ruleItem}
                         /> : null}
                       { item.rules.length > 1 ?
-                        <div className="flex-initial layout-row layout-wrap layout-align-end-end side-padd-5">
+                        <div className="flex-initial layout-row layout-wrap layout-align-end-end side-padd-5px">
                           <Button type="danger" onClick={() => props.handleDeleteRule(ruleItem.key)}>Delete</Button>
                         </div> : null
                       }
