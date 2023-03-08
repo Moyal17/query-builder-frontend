@@ -1,3 +1,6 @@
+## Screenshot:
+![](screencapture-localhost-3000-2023-03-08-00_00_56.png)
+
 ## Architecture:
 
 The query builder application is built using a client-server architecture, where the client is built using ReactJS on the frontend and the server is built using Node.js with Express on the backend. The frontend and backend communicate with each other using RESTful API endpoints.
