@@ -31,14 +31,13 @@ To install and run the query builder application, follow these steps:
 
 Clone the repository to your local machine.
 Navigate to the project directory and run "npm install" to install the necessary dependencies.
-Start the server by running "npm run server" in the terminal.
-Start the client by running "npm start" in another terminal window.
+Start the client by running `npm start` in another terminal window.
 Open a web browser and navigate to "http://localhost:3000" to access the application.
-
 
 ## Dependencies:
 
-1. REACT.js
-2. Ant design (for input use)
-3. Axios: Axios is a popular HTTP client for JavaScript. It is used to make HTTP requests to the back end.
-4. Redux + Redux Thunk: Redux and Redux Thunk are commonly used together in JavaScript web applications to manage application state and handle asynchronous actions.
+1. ReactJS: is a popular JavaScript library used for building user interfaces and web applications, known for its efficiency and ability to handle complex UI components.
+2. Ant Design is a popular UI library for React applications that provides a wide range of customizable and reusable UI components.
+3. Custom CSS - made by me for all the rest
+4. Axios: Axios is a popular HTTP client for JavaScript. It is used to make HTTP requests to the back end.
+5. Redux + Redux Thunk: Redux and Redux Thunk are commonly used together in JavaScript web applications to manage application state and handle asynchronous actions.
