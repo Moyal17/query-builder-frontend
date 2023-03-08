@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import ReactJson from 'react-json-view';
@@ -67,6 +67,11 @@ class QueryBuilderPage extends Component {
     }
   }
 
+  cancelUpdateQuery() {
+    this.props.clearQueryRules()
+    this.props.clearQueryDetails()
+  }
+
   handleRemoveQuery = async (query) => {
     try {
       await this.props.removeQuery(query);
@@ -76,6 +81,7 @@ class QueryBuilderPage extends Component {
   }
 
   handleQueryInput(query) {
+    window.moveTo(0, 0);
     const queryInput = generateKey([...query.jsonQuery]);
     this.props.setQueryDetails(query); // set title desc model
     this.props.setQueryRules(queryInput); // set jsonQuery
@@ -140,7 +146,11 @@ class QueryBuilderPage extends Component {
           <QueryBuilder onChange={(queryObj) => {this.handleQueryResult(queryObj)}} />
           <div className="flex-100 layout-row layout-wrap layout-align-center query-action-btns">
             { queryDetails && queryDetails.id ? (
-              <Button type="primary font16" onClick={() => this.handleUpdateQuery()}>Update Query</Button> ) : (
+              <Fragment>
+                <Button type="danger font16 side-margin-10px" onClick={() => this.cancelUpdateQuery()}>Cancel Update</Button>
+                <Button type="primary font16" onClick={() => this.handleUpdateQuery()}>Update Query</Button>
+              </Fragment>
+              ) : (
               <Button type="primary font16" onClick={() => this.handleCreateQuery()}>Create Query</Button>
             )}
           </div>

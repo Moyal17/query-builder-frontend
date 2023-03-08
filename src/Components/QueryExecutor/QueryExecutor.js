@@ -30,12 +30,10 @@ const QueryExecutor = (props) => {
 
   const executeQuery = async (queryObj) => {
     try {
-      if (!queryResponse) {
-        const query = buildQuery({ id: queryObj.id });
-        const response = await apiMethods.queries.executeQuery(query);
-        setQueryResponse(response);
-      }
-      setCollapseOpen(true);
+      const query = buildQuery({ id: queryObj.id });
+      const response = await apiMethods.queries.executeQuery(query);
+      setQueryResponse(response);
+      if (!isCollapseOpen) setCollapseOpen(true);
     } catch (e) {
       console.log('executeQuery handle error: ', e);
     }
