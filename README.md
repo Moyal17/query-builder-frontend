@@ -19,7 +19,7 @@ The RESTful API design was chosen to provide a standardized and scalable way of 
 Database: 
 For this application, I have used a PostgreSQL database to store and retrieve data. PostgreSQL was chosen for this project as a good entry point and have been a good learning Project :)
 
-####Query Building: 
+Query Building: 
 The application allows the user to build custom queries using a simple and intuitive UI. The user can add conditions and clauses to the query as needed, and the application dynamically generates the corresponding with Sequelize/SQL code.
 
 Error Handling: 
