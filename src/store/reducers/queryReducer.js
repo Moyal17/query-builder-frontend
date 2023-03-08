@@ -1,33 +1,13 @@
 import actionTypes from '../actions/actionTypes';
 import { generateKey, removeItemFromArray, updateItemInList } from "../../services/utilsService";
-import { modelFieldsMap } from "../../constants/constants";
-
-const queryExample = [{
-  condition: 'and',
-  id: Number.parseInt(Math.random() * 10000),
-  rules: [{
-    id: 3,
-    fieldName: 'budget',
-    operator: 'greaterEqual',
-    value: 55000000
-  }, {
-    condition: 'or',
-    id: Number.parseInt(Math.random() * 10000),
-    rules: [{
-      id: 4,
-      fieldName: 'popularity',
-      operator: 'greater',
-      value: 80
-    }]
-  }]
-}];
+import { emptyQuery, queryExample,  modelFieldsMap } from "../../constants/constants";
 
 const initialState = {
   queryList: [],
   queryDetails: {
     model: 'movie',
   },
-  jsonQuery: generateKey(queryExample),
+  jsonQuery: generateKey([...queryExample]),
   modelFields: [...modelFieldsMap.movie]
 };
 
@@ -49,17 +29,23 @@ const achievementReducer = (state = initialState, action) => {
       if (!action.payload) return;
       return {...state, jsonQuery: action.payload};
     case actionTypes.CLEAR_QUERY_RULES:
-      const query = generateKey(queryExample);
+      const query = generateKey(emptyQuery());
       return {...state, jsonQuery: query};
     case actionTypes.CLEAR_QUERY_DATA:
-      return {...state, queryDetails: { model: 'movie' } };
-    case actionTypes.SET_MODEL_FIELDS:
-      return {...state, modelFields: modelFieldsMap[action.payload]};
-    case actionTypes.CLEAR_QUERIES:
+      return {...state, queryDetails: { model: state.queryDetails.model } };
+    case actionTypes.SET_MODEL_FIELDS: {
+      console.log('emptyQuery | ', emptyQuery());
+      const queryBasic = generateKey(emptyQuery())
       return {
         ...state,
-        queryList: [],
+        queryDetails: {...state.queryDetails, model: action.payload},
+        modelFields: modelFieldsMap[action.payload],
+        jsonQuery: queryBasic
       };
+    }
+
+    case actionTypes.CLEAR_QUERIES:
+      return {...state, queryList: [] };
     default:
       return state;
   }

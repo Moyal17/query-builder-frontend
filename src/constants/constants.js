@@ -7,38 +7,37 @@ export const modelNames = [
 
 export const modelFieldsMap = {
   movie: [
-    { id: 1, name: "Movie Id", fieldName: 'movie_id'},
-    { id: 2, name: "Title", fieldName: 'title' },
-    { id: 3, name: "Budget",fieldName: 'budget' },
-    { id: 4, name: "Overview", fieldName: 'overview' },
-    { id: 5, name: "Release Date", fieldName: 'release_date' },
-    { id: 6, name: "Revenue", fieldName: 'revenue' },
-    { id: 8, name: "Runtime", fieldName: 'runtime' },
-    { id: 9, name: "popularity", fieldName: 'popularity' },
-    { id: 10, name: "Release Range", fieldName: 'release_date'}
+    { id: 111, name: "Movie Id", fieldName: 'movie_id'},
+    { id: 212, name: "Title", fieldName: 'title' },
+    { id: 313, name: "Budget",fieldName: 'budget' },
+    { id: 414, name: "Overview", fieldName: 'overview' },
+    { id: 515, name: "Release Date", fieldName: 'release_date' },
+    { id: 616, name: "Revenue", fieldName: 'revenue' },
+    { id: 717, name: "Runtime", fieldName: 'runtime' },
+    { id: 818, name: "popularity", fieldName: 'popularity' },
+    { id: 919, name: "Release Range", fieldName: 'release_date'}
   ],
   actor: [
-    { id: 1, name: "Actor Id", fieldName: 'id'},
-    { id: 2, name: "Name", fieldName: 'name' },
-    { id: 3, name: "Age",fieldName: 'age' },
-    { id: 4, name: "Gender", fieldName: 'gender' },
-    { id: 5, name: "popular", fieldName: 'popular' },
-    { id: 6, name: "Birthday", fieldName: 'birthday' },
-    { id: 8, name: "Movies", fieldName: 'movies' },
-    { id: 9, name: "Valued", fieldName: 'valued' },
+    { id: 121, name: "Actor Id", fieldName: 'id'},
+    { id: 222, name: "Name", fieldName: 'name' },
+    { id: 323, name: "Age",fieldName: 'age' },
+    { id: 424, name: "Gender", fieldName: 'gender' },
+    { id: 525, name: "popular", fieldName: 'popular' },
+    { id: 626, name: "Birthday", fieldName: 'birthday' },
+    { id: 827, name: "Movies", fieldName: 'movies' },
+    { id: 928, name: "Valued", fieldName: 'valued' },
   ],
   food: [
-    { id: 1, name: "Food Id", fieldName: 'id'},
-    { id: 2, name: "Name", fieldName: 'name' },
-    { id: 3, name: "Protein",fieldName: 'protein' },
-    { id: 4, name: "Calories", fieldName: 'calories' },
-    { id: 5, name: "Fat", fieldName: 'fat' },
-    { id: 6, name: "Size", fieldName: 'size' },
-    { id: 8, name: "Portion", fieldName: 'portion' },
-    { id: 9, name: "Category", fieldName: 'category' },
+    { id: 131, name: "Food Id", fieldName: 'id'},
+    { id: 232, name: "Name", fieldName: 'name' },
+    { id: 333, name: "Protein",fieldName: 'protein' },
+    { id: 434, name: "Calories", fieldName: 'calories' },
+    { id: 535, name: "Fat", fieldName: 'fat' },
+    { id: 636, name: "Size", fieldName: 'size' },
+    { id: 737, name: "Portion", fieldName: 'portion' },
+    { id: 838, name: "Category", fieldName: 'category' },
   ]
 }
-
 
 export const operators = [
   { id: 1, name: 'equal', symbol: 'equal', type: 'String' },
@@ -52,3 +51,34 @@ export const operators = [
   { id: 11, name: 'between', symbol: 'between', type: "Range" },
   { id: 12, name: 'not between', symbol: 'notBetween', type: "Range" }
 ];
+
+export const queryExample = [{
+  condition: 'and',
+  id: Number.parseInt(Math.random() * 10000),
+  rules: [{
+    id: 313,
+    fieldName: 'budget',
+    operator: 'greaterEqual',
+    value: 55000000
+  }, {
+    condition: 'or',
+    id: Number.parseInt(Math.random() * 10000),
+    rules: [{
+      id: 818,
+      fieldName: 'popularity',
+      operator: 'greater',
+      value: 80
+    }]
+  }]
+}];
+
+export const emptyQuery = () => {
+  const basicQuery = [{
+    condition: 'and',
+    id: Number.parseInt(Math.random() * 10000),
+    rules: []
+  }];
+  // making a deep clone of this basic Query condition
+  return JSON.parse(JSON.stringify(basicQuery));
+
+}

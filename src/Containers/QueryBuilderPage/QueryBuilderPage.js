@@ -66,6 +66,7 @@ class QueryBuilderPage extends Component {
   cancelUpdateQuery() {
     this.props.clearQueryRules()
     this.props.clearQueryDetails()
+    this.setState({ isOutputVisible: false });
   }
 
   handleRemoveQuery = async (query) => {
@@ -84,9 +85,8 @@ class QueryBuilderPage extends Component {
   }
 
   handleModelChanged(val) {
-    const query = {...this.props.queryDetails, model: val};
-    this.props.setQueryDetails(query);
-    this.props.setModelFields(val)
+    this.props.setModelFields(val);
+    this.setState({ isOutputVisible: false });
   }
 
   handleInputChanged(key, val) {
