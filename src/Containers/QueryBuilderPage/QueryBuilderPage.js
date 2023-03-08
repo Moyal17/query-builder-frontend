@@ -10,6 +10,7 @@ import QueryExecutor from "../../Components/QueryExecutor/QueryExecutor";
 import queryStringParser from "../../services/queryStringParser";
 import { generateKey } from "../../services/utilsService";
 import { modelNames } from "../../constants/constants";
+import { toast } from 'react-toastify';
 import './QueryBuilderPage.css';
 const { Option } = Select;
 
@@ -29,6 +30,10 @@ class QueryBuilderPage extends Component {
       console.log('componentDidMount: ', data);
     } catch (e) {
       console.log('handle error');
+      toast.error('An error occurred while fetching your Queriesm, please refresh or try again later.', {
+        closeOnClick: true,
+        pauseOnHover: true
+      });
     }
   }
 
@@ -44,9 +49,18 @@ class QueryBuilderPage extends Component {
         await this.props.createQuery(body);
         this.props.clearQueryRules()
       }
-      else console.log('no title || no jsonQuery');
+      else {
+        toast.error('Please add a title for your query', {
+          closeOnClick: true,
+          pauseOnHover: true
+        });
+      }
     } catch (e) {
       console.log('handle error');
+      toast.error('An error occurred while saving your query.', {
+        closeOnClick: true,
+        pauseOnHover: true
+      });
     }
   }
 
@@ -59,7 +73,10 @@ class QueryBuilderPage extends Component {
         this.props.clearQueryDetails()
       }
     } catch (e) {
-      console.log('handle error');
+      toast.error('An error occurred while Updating your query.', {
+        closeOnClick: true,
+        pauseOnHover: true
+      });
     }
   }
 
@@ -73,7 +90,7 @@ class QueryBuilderPage extends Component {
     try {
       await this.props.removeQuery(query);
     } catch (e) {
-      console.log('handleRemoveQuery handle error: ', e);
+      toast.error('An error occurred while Deleting your query from the DB.', {closeOnClick: true, pauseOnHover: true});
     }
   }
 

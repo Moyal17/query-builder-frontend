@@ -1,7 +1,9 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component, Suspense } from 'react';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import 'antd/dist/antd.variable.min.css';
 import './ant-input-css.css';
 import './App.css';
@@ -47,6 +49,17 @@ class App extends Component {
             </div>
           </Suspense>
         </div>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          pauseOnHover
+          theme="dark"
+        />
       </div>
     );
   }
