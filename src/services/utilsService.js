@@ -56,3 +56,29 @@ export const buildQuery = (queryObj) => {
   }
   return '';
 }
+
+export const updateItemInList = (array, updatedItem) => {
+  return array.map((item) => {
+    if (item.id === updatedItem.id) return updatedItem;
+    else return item;
+  })
+}
+
+export const removeItemFromArray = (array, item) => {
+  const index = array.indexOf(item);
+  return [...array.slice(0, index), ...array.slice(index + 1)];
+}
+export const removeItemFromObject = (object, key) => {
+  const newObject = { ...object };
+  delete newObject[key];
+  return newObject;
+}
+
+export const generateKey = (queryInput) => {
+  return queryInput.map(item => {
+    item.key = randomizeId();
+    if (item.rules) generateKey(item.rules);
+    return item;
+  });
+}
+

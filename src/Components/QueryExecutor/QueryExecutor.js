@@ -1,31 +1,43 @@
-import React, {Fragment, useState} from 'react';
+import React, { useState} from 'react';
 import { Collapse } from 'react-collapse';
 import { apiMethods } from "../../services/apiService";
 import { buildQuery } from "../../services/utilsService";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import './QueryExecutor.css';
 
 const QueryExecutor = (props) => {
   const [ isCollapseOpen, setCollapseOpen ] = useState(false);
   const [ queryResponse, setQueryResponse ] = useState(null);
-  const { query, handleUpdateQuery } = props;
+  const { query, handleUpdateQuery, handleRemoveQuery } = props;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleDeleteQuery = async () => {
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const removeQuery = async () => {
     try {
-      const response = await apiMethods.queries.remove();
+      handleRemoveQuery(query);
+      setIsModalOpen(false);
     } catch (e) {
-      console.log('handle error: ', e);
+      console.log('handleRemoveQuery handle error: ', e);
     }
   }
 
   const executeQuery = async (queryObj) => {
     try {
-      const query = buildQuery({ id: queryObj.id });
-      const response = await apiMethods.queries.executeQuery(query);
-      setQueryResponse(response);
+      if (!queryResponse) {
+        const query = buildQuery({ id: queryObj.id });
+        const response = await apiMethods.queries.executeQuery(query);
+        setQueryResponse(response);
+      }
       setCollapseOpen(true);
     } catch (e) {
-      console.log('handle error: ', e);
+      console.log('executeQuery handle error: ', e);
     }
   }
 
@@ -40,8 +52,8 @@ const QueryExecutor = (props) => {
             </div>
             <div className="queryAction flex-33 layout-row layout-wrap layout-align-end-end">
               <Button type="primary" className="margin-5" onClick={() => executeQuery(query)}>Execute Query</Button>
-              <Button type="primary" className="margin-5" onClick={() => handleUpdateQuery(query)}>Update Query</Button>
-              <Button type="danger" className="margin-5" onClick={() => handleDeleteQuery(query)}>Delete</Button>
+              <Button type="primary" className="margin-5" onClick={() => handleUpdateQuery({...query})}>Update Query</Button>
+              <Button type="danger" className="margin-5" onClick={() => openModal()}>Delete</Button>
             </div>
           </div>
         </div>
@@ -51,11 +63,19 @@ const QueryExecutor = (props) => {
               <div className="flex-100 layout-row layout-align-start-start">
                 {queryResponse && queryResponse.length > 0 &&
                 <div className="flex-initial layout-row layout-align-start-start margin-bottom-10px">
-                  <label className="font14">{`Data Length: ${queryResponse && queryResponse.length} `}</label>
-                  <label className="font14 side-padd-15px">{`Model: ${query && query.model.toUpperCase()} `}</label>
+                  <Button type="dashed" className="">
+                    <b>Data Length:</b><span className="side-padd-5px">{` ${queryResponse && queryResponse.length} `}</span>
+                  </Button>
+                  <Button type="dashed" className="side-margin-5px">
+                    <b>Model:</b><span className="side-padd-5px">{` ${query && query.model.toUpperCase()} `}</span>
+                  </Button>
                 </div>
                 }
-              </div>
+                <div className="queryAction flex layout-row layout-wrap layout-align-end-end">
+                  <Button type="dashed" className="margin-5" onClick={() => setCollapseOpen(!isCollapseOpen)}>Minimize</Button>
+                </div>
+
+                </div>
               <div className="flex-100 layout-row layout-wrap layout-align-start-start responseObj">
                 { queryResponse && queryResponse.length > 0 &&
                 <pre>{JSON.stringify(queryResponse,null,2)}</pre>
@@ -64,6 +84,9 @@ const QueryExecutor = (props) => {
             </div>
           </Collapse>
         </div>
+        <Modal title="Delete Query" open={isModalOpen} onOk={() => { removeQuery() }} onCancel={handleCancel}>
+          <p className="font14">Are you sure you want to remove "{ query.title }" query?</p>
+        </Modal>
       </div>
     </div>
   )

@@ -39,7 +39,7 @@
   border-bottom: 1px solid var(--border-color);
   margin: 0 0 10px 0;
 }
-input,.ant-input, .ant-select-single:not(.ant-select-customize-input) .ant-select-selector,.QueryBuilder .ant-picker {
+input,.ant-input, .ant-input-number, .ant-select-single:not(.ant-select-customize-input) .ant-select-selector,.QueryBuilder .ant-picker {
   border: 1px solid var(--border-color);
   height: 40px;
   background-color: var(--border-color);
@@ -49,7 +49,9 @@ input,.ant-input, .ant-select-single:not(.ant-select-customize-input) .ant-selec
   font-weight: 100;
   padding: 5px 10px;
   border-radius: 5px;
+  width: 100%;
 }
+
 .QueryBuilder .ant-btn, .QueryBuilder .ant-radio-button-wrapper {
   height: 40px;
   font-size: 16px;

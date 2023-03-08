@@ -1,27 +1,9 @@
 import React, { Component } from "react";
-import RuleList from './ruleList.js';
+import {connect} from "react-redux";
+import actionTypes from "../../store/actions/actionTypes";
 import { randomizeId } from '../../services/utilsService';
+import RuleList from './ruleList.js';
 import './QueryBuilder.css'
-
-const rules = [{
-  condition: 'and',
-  id: 0,
-  rules: [{
-    id: 3,
-    fieldName: 'budget',
-    operator: 'greaterEqual',
-    value: 55000000
-  }, {
-    condition: 'or',
-    id: 9,
-    rules: [{
-      id: 4,
-      fieldName: 'popularity',
-      operator: 'greater',
-      value: 80
-    }]
-  }]
-}];
 
 const fields = [
   { id: 1, name: "Movie Id", fieldName: 'movie_id'},
@@ -52,9 +34,8 @@ class QueryBuilder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rules: [...rules]
-    };
-    this.generateKey([...rules]);
+      rules: this.props.jsonQuery
+    }
   }
 
   componentDidMount() {
@@ -76,25 +57,14 @@ class QueryBuilder extends Component {
     return obj['type'] ? obj['type'] : ''
   }
 
-  generateKey (rules) {
-    rules.forEach(item => {
-      item.key = randomizeId()
-      if (item.rules) this.generateKey(item.rules)
-    })
-  }
-
-  updateRules () {
-    this.setState({
-      rules: this.state.rules
-    })
-    this.props.handleChange(this.state.rules);
+  updateRules (queryObj) {
+    this.props.setQueryRules(queryObj);
+    this.props.onChange();
   }
 
   findRulesById (rules, id, callback) {
     rules.forEach((item, index) => {
-      if (item.id === id) {
-        callback(item, rules, index)
-      }
+      if (item.id === id) callback(item, rules, index)
       if (item.rules) this.findRulesById(item.rules, id, callback)
     })
   }
@@ -107,14 +77,16 @@ class QueryBuilder extends Component {
   }
 
   handleCondition (id) {
-    this.findRulesById(this.state.rules, id, (item) => {
+    const queryObj = [...this.props.jsonQuery];
+    this.findRulesById(queryObj, id, (item) => {
       item.condition = item.condition === "and" ? "or" : "and";
     })
-    this.updateRules()
+    this.updateRules(queryObj);
   }
 
-  handleAddRule (id) {
-    this.findRulesById(this.state.rules, id, (item) => {
+  handleAddRule (id, jsonQuery) {
+    const queryObj = [...jsonQuery];
+    this.findRulesById(queryObj, id, (item) => {
       item.rules.push({
         id: [...fields][0].id,
         operator: [...operators][0].symbol,
@@ -123,22 +95,24 @@ class QueryBuilder extends Component {
         key: randomizeId()
       })
     })
-    this.updateRules()
+    this.updateRules(queryObj);
   }
 
-  handleDeleteRule (key) {
-    this.findRulesByKey(this.state.rules, key, (item, itemRules, itemIndex) => {
+  handleDeleteRule (key, jsonQuery) {
+    const queryObj = [...jsonQuery];
+    this.findRulesByKey(queryObj, key, (item, itemRules, itemIndex) => {
       itemRules.splice(itemIndex, 1)
     })
-    this.updateRules();
+    this.updateRules(queryObj);
   }
 
-  handleAddGroup (id) {
-    this.findRulesById(this.state.rules, id, (item) => {
+  handleAddGroup (id, jsonQuery) {
+    const queryObj = [...jsonQuery];
+    this.findRulesById(queryObj, id, (item) => {
       item.rules.push({
         condition: 'or',
         groupLvl: item.rules.length + 1,
-        id: Number.parseInt(Math.random() * 1000),
+        id: Number.parseInt(Math.random() * 10000),
         key: randomizeId(),
         rules: [{
           id: [...fields][0].id,
@@ -149,66 +123,81 @@ class QueryBuilder extends Component {
         }]
       })
     })
-    this.updateRules()
+    this.updateRules(queryObj);
   }
 
-  handleDeleteGroup (id) {
-    this.findRulesById(this.state.rules, id, (item, itemRules, itemIndex) => {
+  handleDeleteGroup (id, jsonQuery) {
+    const queryObj = [...jsonQuery];
+    this.findRulesById(queryObj, id, (item, itemRules, itemIndex) => {
       itemRules.splice(itemIndex, 1)
     })
-    this.updateRules()
+    this.updateRules(queryObj);
   }
 
   handleChangedField (key, id) {
-    this.findRulesByKey(this.state.rules, key, (currentItem) => {
+    const queryObj = [...this.props.jsonQuery];
+    this.findRulesByKey(queryObj, key, (currentItem) => {
       currentItem.id = id;
       const obj = [...fields].find(fieldItem => fieldItem.id === currentItem.id);
       currentItem.fieldName = obj.fieldName;
       if (obj) currentItem.categoryList = obj.categoryList;
     })
-    this.updateRules();
+    this.updateRules(queryObj);
   }
 
   handleChangedOperator (key, val) {
-    this.findRulesByKey(this.state.rules, key, (item) => {
+    const queryObj = [...this.props.jsonQuery];
+    this.findRulesByKey(queryObj, key, (item) => {
       item.operator = val;
     })
-    this.updateRules();
+    this.updateRules(queryObj);
   }
 
   handleChangedValue (key, val) {
-    this.findRulesByKey(this.state.rules, key, (item) => {
+    const queryObj = [...this.props.jsonQuery];
+    this.findRulesByKey(queryObj, key, (item) => {
       if (Number(val)) item.value = Number(val);
       else item.value = val;
     })
-    this.updateRules();
+    this.updateRules(queryObj);
   }
 
   render() {
+    const { jsonQuery } = this.props;
     return <div className="QueryBuilder flex-100 layout-row layout-wrap layout-align-start">
       <RuleList
-        rules={this.state.rules}
+        rules={jsonQuery}
         fields={[...fields]}
         operators={[...operators]}
         getOperatorVisible={(id) => this.getOperatorVisible(id)}
         handleCondition={(id) => this.handleCondition(id)}
-        handleAddRule={(id) => this.handleAddRule(id)}
-        handleAddGroup={(id) => this.handleAddGroup(id)}
-        handleDeleteGroup={(id) => this.handleDeleteGroup(id)}
+        handleAddRule={(id) => this.handleAddRule(id, jsonQuery)}
+        handleAddGroup={(id) => this.handleAddGroup(id, jsonQuery)}
+        handleDeleteGroup={(id) => this.handleDeleteGroup(id, jsonQuery)}
         handleChangedField={(key, id) => this.handleChangedField(key, id)}
         handleChangedOperator={(key, val) => this.handleChangedOperator(key, val)}
         handleChangedValue={(key, val) => this.handleChangedValue(key, val)}
         getFieldsType={(id) => this.getFieldsType(id)}
         getOperatorType={(id) => this.getOperatorType(id)}
-        handleDeleteRule={(id) => this.handleDeleteRule(id)}
+        handleDeleteRule={(id) => this.handleDeleteRule(id, jsonQuery)}
       />
       <div className="flex-100 layout-row layout-wrap layout-align-start-start padd-10 jsonStringContainer" style={{display: 'none'}}>
         <div className="flex-100 layout-row layout-wrap layout-align-start-start">
           <h3>Builder Output</h3>
         </div>
-         <pre>{JSON.stringify(this.state.rules,null,2)}</pre>
+         <pre>{JSON.stringify(jsonQuery,null,2)}</pre>
       </div>
     </div>;
   }
 }
-export default QueryBuilder;
+
+
+const mapStateToProps = state => ({
+  jsonQuery: state.queryR.jsonQuery
+});
+
+const mapDispatchToProps = dispatch => ({
+  setQueryRules: (query) => dispatch({ type: actionTypes.SET_QUERY_RULES, payload: query  }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(QueryBuilder);

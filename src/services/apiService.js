@@ -63,9 +63,8 @@ const apiMethods = {
     update (body) {
       return publicClient.put('/public/queries/updateQuery', body , publicClientConfig);
     },
-    remove (query) {
-      const api = '/public/queries/removeQuery';
-      return publicClient.delete(query ? (api + query) : api, publicClientConfig);
+    remove (queryId) {
+      return publicClient.delete(`/public/queries/removeQuery/${queryId}`, publicClientConfig);
     },
   }
 };
