@@ -147,7 +147,6 @@ class QueryBuilderPage extends Component {
       <div className="flex-100 layout-row layout-wrap layout-align-start-start padd15">
         <div className="flex-100 layout-row layout-wrap layout-align-center padd15 text-center">
           <h1 className="flex-100 layout-row layout-align-center">Query Builder Page</h1>
-          <Link to={'/'}>Home</Link>
         </div>
         <div className="card-container flex-100 layout-row layout-wrap layout-align-start-start padd15">
           <div className="flex-100 layout-row layout-wrap layout-align-start-start">
