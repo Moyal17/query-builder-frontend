@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {connect} from "react-redux";
 import actionTypes from "../../store/actions/actionTypes";
 import { randomizeId } from '../../services/utilsService';
+import { operators} from '../../constants/constants';
 import RuleList from './ruleList.js';
 import './QueryBuilder.css'
 
@@ -17,26 +18,7 @@ const fields = [
   { id: 10, name: "Release Range", fieldName: 'release_date'}
 ];
 
-const operators = [
-  { id: 1, name: 'equal', symbol: 'equal', type: 'String' },
-  { id: 2, name: 'not equal', symbol: 'notEqual', type: 'String' },
-  { id: 3, name: 'is not null', value: 'disabled', symbol: 'isNotNull' },
-  { id: 4, name: 'is null', value: 'disabled', symbol: 'isNull' },
-  { id: 7, name: 'less', symbol: 'less', type: 'Number' },
-  { id: 8, name: 'less or equal', symbol: 'lessEqual', type: 'Number' },
-  { id: 9, name: 'greater', symbol: 'greater', type: 'Number' },
-  { id: 10, name: 'greater or equal', symbol: 'greaterEqual', type: 'Number' },
-  { id: 11, name: 'between', symbol: 'between', type: "Range" },
-  { id: 12, name: 'not between', symbol: 'notBetween', type: "Range" }
-];
-
 class QueryBuilder extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rules: this.props.jsonQuery
-    }
-  }
 
   componentDidMount() {
 
@@ -53,7 +35,7 @@ class QueryBuilder extends Component {
   }
 
   getFieldsType (id) {
-    const obj = [...fields].find(item => item.id === id);
+    const obj = [...this.props.modelFields].find(item => item.id === id);
     return obj['type'] ? obj['type'] : ''
   }
 
@@ -88,9 +70,9 @@ class QueryBuilder extends Component {
     const queryObj = [...jsonQuery];
     this.findRulesById(queryObj, id, (item) => {
       item.rules.push({
-        id: [...fields][0].id,
+        id: [...this.props.modelFields][0].id,
         operator: [...operators][0].symbol,
-        fieldName: [...fields][0].fieldName,
+        fieldName: [...this.props.modelFields][0].fieldName,
         value: '',
         key: randomizeId()
       })
@@ -115,9 +97,9 @@ class QueryBuilder extends Component {
         id: Number.parseInt(Math.random() * 10000),
         key: randomizeId(),
         rules: [{
-          id: [...fields][0].id,
+          id: [...this.props.modelFields][0].id,
           key: randomizeId(),
-          fieldName: [...fields][0].fieldName,
+          fieldName: [...this.props.modelFields][0].fieldName,
           operator: [...operators][0].symbol,
           value: ''
         }]
@@ -138,7 +120,7 @@ class QueryBuilder extends Component {
     const queryObj = [...this.props.jsonQuery];
     this.findRulesByKey(queryObj, key, (currentItem) => {
       currentItem.id = id;
-      const obj = [...fields].find(fieldItem => fieldItem.id === currentItem.id);
+      const obj = [...this.props.modelFields].find(fieldItem => fieldItem.id === currentItem.id);
       currentItem.fieldName = obj.fieldName;
       if (obj) currentItem.categoryList = obj.categoryList;
     })
@@ -167,7 +149,7 @@ class QueryBuilder extends Component {
     return <div className="QueryBuilder flex-100 layout-row layout-wrap layout-align-start">
       <RuleList
         rules={jsonQuery}
-        fields={[...fields]}
+        fields={[...this.props.modelFields]}
         operators={[...operators]}
         getOperatorVisible={(id) => this.getOperatorVisible(id)}
         handleCondition={(id) => this.handleCondition(id)}
@@ -191,9 +173,9 @@ class QueryBuilder extends Component {
   }
 }
 
-
 const mapStateToProps = state => ({
-  jsonQuery: state.queryR.jsonQuery
+  jsonQuery: state.queryR.jsonQuery,
+  modelFields: state.queryR.modelFields
 });
 
 const mapDispatchToProps = dispatch => ({

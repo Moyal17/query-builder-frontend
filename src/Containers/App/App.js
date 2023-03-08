@@ -3,7 +3,6 @@ import React, { Component, Suspense } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.variable.min.css';
-// import 'antd/dist/antd.dark.css';
 import './ant-input-css.css';
 import './App.css';
 /* Views */

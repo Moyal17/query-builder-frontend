@@ -1,5 +1,6 @@
 import actionTypes from '../actions/actionTypes';
-import {generateKey, removeItemFromArray, updateItemInList} from "../../services/utilsService";
+import { generateKey, removeItemFromArray, updateItemInList } from "../../services/utilsService";
+import { modelFieldsMap } from "../../constants/constants";
 
 const queryExample = [{
   condition: 'and',
@@ -26,7 +27,8 @@ const initialState = {
   queryDetails: {
     model: 'movie',
   },
-  jsonQuery: generateKey(queryExample)
+  jsonQuery: generateKey(queryExample),
+  modelFields: [...modelFieldsMap.movie]
 };
 
 const achievementReducer = (state = initialState, action) => {
@@ -51,6 +53,8 @@ const achievementReducer = (state = initialState, action) => {
       return {...state, jsonQuery: query};
     case actionTypes.CLEAR_QUERY_DATA:
       return {...state, queryDetails: { model: 'movie' } };
+    case actionTypes.SET_MODEL_FIELDS:
+      return {...state, modelFields: modelFieldsMap[action.payload]};
     case actionTypes.CLEAR_QUERIES:
       return {
         ...state,

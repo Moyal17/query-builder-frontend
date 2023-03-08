@@ -1786,3 +1786,37 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
 .ant-picker-panel-rtl .ant-picker-time-panel {
   direction: ltr;
 }
+
+
+.ant-btn-dashed, .ant-btn-default {
+  color: var(--text-color);
+  border-color: #4b4b4b;
+  background: var(--foreground-color);
+  border-style: dashed;
+}
+.ant-btn-dashed:focus, .ant-btn-dashed:hover , .ant-btn-default:focus , .ant-btn-default:hover {
+  color: var(--text-color);
+  border-color: #4b4b4b;
+  background: #262626;
+}
+.card-container, .ReactCollapse--content {
+  background-color: var(--foreground-color);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+.ant-modal, .ant-modal-title {
+  color: var(--text-color)
+}
+.ant-modal-content, .ant-modal-header {
+  background-color: var(--foreground-color);
+  color: var(--text-color);
+}
+.ant-modal-header {
+  border-bottom: 1px solid var(--border-color);
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+}
+.ant-modal-content {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}

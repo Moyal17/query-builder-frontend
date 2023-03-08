@@ -2,20 +2,16 @@ import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import ReactJson from 'react-json-view';
+import {Input, Select, Button} from "antd";
 import { getUserQueries, getMovies, createQuery, updateQuery, removeQuery } from '../../store/actions';
 import actionTypes from '../../store/actions/actionTypes';
 import QueryBuilder from "../../Components/QueryBuilder/QueryBuilder";
 import QueryExecutor from "../../Components/QueryExecutor/QueryExecutor";
 import queryStringParser from "../../services/queryStringParser";
 import { generateKey } from "../../services/utilsService";
+import { modelNames } from "../../constants/constants";
 import './QueryBuilderPage.css';
-import {Input, Select, Button} from "antd";
 const { Option } = Select;
-
-const models = [
-  { id: 1, name: "Movies", value: 'movie' },
-  { id: 2, name: "Actors", value: 'actor' },
-];
 
 class QueryBuilderPage extends Component {
   constructor (props) {
@@ -88,9 +84,9 @@ class QueryBuilderPage extends Component {
   }
 
   handleModelChanged(val) {
-    console.log('handleModelChanged val: ', val)
     const query = {...this.props.queryDetails, model: val};
     this.props.setQueryDetails(query);
+    this.props.setModelFields(val)
   }
 
   handleInputChanged(key, val) {
@@ -108,7 +104,7 @@ class QueryBuilderPage extends Component {
             <div className="id-wrap flex-100 layout-row layout-wrap layout-align-start-start">
               <p className="small-title">Select Model</p>
               <Select onChange={(val) => this.handleModelChanged(val)} className="select flex-100" value={queryDetails.model} defaultValue={queryDetails.model}>
-                { models && models.map(model => (<Option key={`${model.name}_${model.id}`} value={model.value}>{model.name}</Option>)) }
+                { modelNames && modelNames.map(model => (<Option key={`${model.name}_${model.id}`} value={model.value}>{model.name}</Option>)) }
               </Select>
             </div>
           </div>
@@ -194,6 +190,7 @@ const mapDispatchToProps = dispatch => ({
   removeQuery: (body) => dispatch(removeQuery(body)),
   setQueryDetails: (query) => dispatch({ type: actionTypes.SET_QUERY_DETAILS, payload: query  }),
   setQueryRules: (query) => dispatch({ type: actionTypes.SET_QUERY_RULES, payload: query  }),
+  setModelFields: (modelName) => dispatch({ type: actionTypes.SET_MODEL_FIELDS, payload: modelName  }),
   clearQueryRules: () => dispatch({ type: actionTypes.CLEAR_QUERY_RULES }),
   clearQueryDetails: () => dispatch({ type: actionTypes.CLEAR_QUERY_DATA }),
 });
