@@ -2,22 +2,23 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { checkIfLoggedIn } from '../../store/actions';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'antd/dist/antd.variable.min.css';
 import './ant-input-css.css';
 import './App.css';
-/* Views */
 
-const HomePage = React.lazy(() => import('../HomePage/HomePage'));
+/* Views */
 const LoginPage = React.lazy(() => import('../LoginPage/LoginPage'));
+const SignUpPage = React.lazy(() => import('../SignUpPage/SignUpPage'));
 const QueryBuilderPage = React.lazy(() => import('../../Containers/QueryBuilderPage/QueryBuilderPage'));
 
 
 const AuthRoute = ({ component: Component, userAuth, ...rest }) => {
   return (
     <Route
-      {...rest} render={(props) => (userAuth ? <Component {...props} /> : <Redirect to="/intro" />)}
+      {...rest} render={(props) => (userAuth ? <Component {...props} /> : <Redirect to="/login" />)}
     />
   );
 };
@@ -25,26 +26,27 @@ const AuthRoute = ({ component: Component, userAuth, ...rest }) => {
 class App extends Component {
   async componentDidMount() {
     try {
-
+      const data = await this.props.checkIfLoggedIn();
+      if (!data || !data.name) this.props.history.push('/login');
+      else this.props.history.push('/queryBuilder');
     } catch (e) {
-      console.log('handle error');
+      this.props.history.push('/login');
     }
   }
 
 
   render() {
-    const auth = this.props.authenticated;
-
+    const { authorized } = this.props;
     return (
       <div>
         <div>
           <Suspense fallback={<div className="gogo-loading" />}>
             <div className="">
               <Switch>
-                <AuthRoute path="/query_builder" userAuth={auth} component={QueryBuilderPage} />
-                <Route path="/" exact render={props => <QueryBuilderPage {...props} />}/>
-                <Route path="/login" render={props => <LoginPage {...props} />}/>
-                <Redirect to={'/'} render={props => <HomePage {...props} />}/>
+                <AuthRoute path="/queryBuilder" userAuth={authorized} component={QueryBuilderPage} />
+                <Route path="/" render={props => <LoginPage {...props} />}/>
+                <Route path="/signUp" render={props => <SignUpPage {...props} />}/>
+                <Redirect to={'/'} render={props => <LoginPage {...props} />}/>
               </Switch>
             </div>
           </Suspense>
@@ -66,10 +68,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  authenticated: state.userR.authenticated,
+  authorized: state.userR.authorized,
 });
 
 const mapDispatchToProps = dispatch => ({
- });
+  checkIfLoggedIn: () => dispatch(checkIfLoggedIn()),
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

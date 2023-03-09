@@ -3,13 +3,13 @@ import {toast} from "react-toastify";
 
 const initialState = {
   userInfo: {},
-  authenticated: true,
+  authorized: false,
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_USER_CREDENTIALS:
-      return {...state, userInfo: action.payload.user};
+      return {...state, userInfo: action.payload, authorized: true};
     case actionTypes.HANDLE_ERROR_RESPONSE: {
       toast.error('An error occurred, thats weird...', {closeOnClick: true, pauseOnHover: true});
       return {...state};

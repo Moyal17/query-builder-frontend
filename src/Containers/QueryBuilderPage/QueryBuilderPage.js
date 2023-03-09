@@ -1,9 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
 import ReactJson from 'react-json-view';
 import {Input, Select, Button} from "antd";
-import { getUserQueries, getMovies, createQuery, updateQuery, removeQuery } from '../../store/actions';
+import { getUserQueries, createQuery, updateQuery, removeQuery } from '../../store/actions';
 import actionTypes from '../../store/actions/actionTypes';
 import QueryBuilder from "../../Components/QueryBuilder/QueryBuilder";
 import QueryExecutor from "../../Components/QueryExecutor/QueryExecutor";
@@ -156,7 +155,7 @@ class QueryBuilderPage extends Component {
             { this.renderQueryModelHeader() }
           </div>
           <QueryBuilder onChange={(queryObj) => {this.handleQueryResult(queryObj)}} />
-          <div className="flex-100 layout-row layout-wrap layout-align-center query-action-btns">
+          <div className="flex-100 layout-row layout-wrap layout-align-center action-btns">
             { queryDetails && queryDetails.id ? (
               <Fragment>
                 <Button type="danger font16 side-margin-10px" onClick={() => this.cancelUpdateQuery()}>Cancel Update</Button>
@@ -200,7 +199,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getUserQueries: () => dispatch(getUserQueries()),
-  getMovies: () => dispatch(getMovies()),
   createQuery: (body) => dispatch(createQuery(body)),
   updateQuery: (body) => dispatch(updateQuery(body)),
   removeQuery: (body) => dispatch(removeQuery(body)),

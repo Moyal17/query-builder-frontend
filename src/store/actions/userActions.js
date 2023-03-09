@@ -3,28 +3,35 @@ import { apiMethods, publicClientConfig } from '../../services/apiService';
 import actionTypes from '../actions/actionTypes';
 import { handleErrorResponse } from './index';
 
-export const saveUserToken = (res) => {
-  if (res.token) {
-    publicClientConfig.headers.Authorization = res.token;
-    localStorage.set('queryBuilder-auth', res.token);
+export const saveUserCredentials = (data) => {
+  if (data.token) {
+    publicClientConfig.headers.Authorization = data.token;
+    localStorage.set('qb-token', data.token);
   }
   return {
-    type: actionTypes.HANDLE_SUCCESS_RESPONSE,
-    payload: 'Handled Successfully'
+    type: actionTypes.SAVE_USER_CREDENTIALS,
+    payload: data
   };
 };
 
-export const saveUserCredentials = (res) => {
-  if (res.token) {
-    publicClientConfig.headers.Authorization = res.token;
-    localStorage.set('queryBuilder-auth', res.token);
-  }
+export const saveUserData = (data) => {
   return {
-    type: actionTypes.HANDLE_SUCCESS_RESPONSE,
-    payload: 'Handled Successfully'
+    type: actionTypes.SAVE_USER_CREDENTIALS,
+    payload: data
   };
 };
 
+
+export const checkIfLoggedIn = () => async (dispatch) => {
+  try {
+    const data = await apiMethods.users.checkIfLoggedIn();
+    dispatch(saveUserData(data));
+    return data;
+  } catch (e) {
+    console.log('error', e);
+    return false;
+  }
+};
 
 export const loginUser = body => async (dispatch) => {
   try {

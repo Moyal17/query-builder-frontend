@@ -263,3 +263,22 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 300px;
 }
 
+.action-btns .ant-btn {
+  min-width: 150px;
+  height: auto;
+  border-radius: 5px;
+}
+
+
+.LoginPage, .SignUpPage {
+  height: 100vh;
+}
+.login-container {
+  position: relative;
+  z-index: 1;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 35px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
+}

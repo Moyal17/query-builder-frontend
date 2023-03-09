@@ -1,3 +1,3 @@
-export {loginUser, signUpUser, logoutUser } from './userActions';
-export { handleErrorResponse, handleSuccessResponse, getMovies } from './appActions';
+export { loginUser, signUpUser, logoutUser, checkIfLoggedIn } from './userActions';
+export { handleErrorResponse, handleSuccessResponse } from './appActions';
 export { getUserQueries, createQuery, updateQuery, removeQuery } from './queryActions';

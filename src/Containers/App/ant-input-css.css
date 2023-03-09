@@ -1788,6 +1788,22 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
 }
 
 
+input,.ant-input,
+.ant-input-number,
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector, .ant-picker {
+  border: 1px solid var(--border-color);
+  height: 40px;
+  background-color: var(--border-color);
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-weight: 100;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+
 .ant-btn-dashed, .ant-btn-default {
   color: var(--text-color);
   border-color: #4b4b4b;
@@ -1820,3 +1836,5 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   border: 1px solid var(--border-color);
   border-radius: 5px;
 }
+
+

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import localStorage from 'local-storage';
+import {toast} from 'react-toastify';
 
-const token = localStorage.get('queryBuilder-auth') || null;
+const token = localStorage.get('qb-token') || null;
 
 const publicClient = axios.create({
   baseURL: 'http://localhost:8082'
@@ -31,21 +32,22 @@ publicClient.interceptors.response.use((response) => {
 }, (error) => {
   console.log('interceptors response error: ', error.message);
   console.log(`code: ${error.response.status}, data: ${error.response.data}`);
+  if(error.response.data && error.response.data.message){
+    toast.error(error.response.data.message, {
+      closeOnClick: true,
+      pauseOnHover: true
+    });
+  }
   return Promise.reject(error);
 });
 
 const apiMethods = {
   users: {
+    checkIfLoggedIn: query => publicClient.get(`/api/users/checkIfLoggedIn`, publicClientConfig),
     register: body => publicClient.post('/public/users/register', body, publicClientConfig),
     login: body => publicClient.post('/public/users/login', body, publicClientConfig),
     logout: () => {
       localStorage.remove('qb-auth');
-    },
-  },
-  movies: {
-    getMovies (query) {
-      const api = '/public/movies/getMovies';
-      return publicClient.get(query ? (api + query) : api, publicClientConfig);
     },
   },
   queries: {
