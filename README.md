@@ -7,22 +7,22 @@ The query builder application is built using a client-server architecture, where
 
 ## Design Choices:
 
-####Frontend Framework: 
+#### Frontend Framework: 
 ReactJs was chosen for its flexibility, reusability, and performance.
 To speed up development and ensure a consistent design, Ant-Desgin inputs were used as a UI library Components, mainly my own CSS is used (flex grid, card container, padding/margin and basic font design)
 
 Backend Framework: The backend of the application is built using Node.js with Express. Express was chosen for its simplicity, flexibility, and scalability.
 
-####API Design: 
+API Design: 
 The RESTful API design was chosen to provide a standardized and scalable way of communicating between the frontend and the backend. Each endpoint is designed to perform a specific action, such as retrieving data or updating data.
 
-####Database: 
+Database: 
 For this application, I have used a PostgreSQL database to store and retrieve data. PostgreSQL was chosen for this project as a good entry point and have been a good learning Project :)
 
-####Query Building: 
+Query Building: 
 The application allows the user to build custom queries using a simple and intuitive UI. The user can add conditions and clauses to the query as needed, and the application dynamically generates the corresponding with Sequelize/SQL code.
 
-####Error Handling: 
+Error Handling: 
 The application is designed to handle errors gracefully and provide informative error messages to the user. Error messages are displayed in a user-friendly way and provide information on what went wrong.
 
 ## Instructions:
