@@ -52,21 +52,21 @@ const apiMethods = {
   },
   queries: {
     getUserQueries (query) {
-      const api = '/public/users/getUserQueries';
+      const api = '/api/users/getUserQueries';
       return publicClient.get(query ? (api + query) : api, publicClientConfig);
     },
     executeQuery (query) {
-      const api = '/public/queries/executeQuery';
+      const api = '/api/queries/executeQuery';
       return publicClient.get(query ? (api + query) : api, publicClientConfig);
     },
     create (body) {
-      return publicClient.post('/public/queries/createQuery', body , publicClientConfig);
+      return publicClient.post('/api/queries/createQuery', body , publicClientConfig);
     },
     update (body) {
-      return publicClient.put('/public/queries/updateQuery', body , publicClientConfig);
+      return publicClient.put('/api/queries/updateQuery', body , publicClientConfig);
     },
     remove (queryId) {
-      return publicClient.delete(`/public/queries/removeQuery/${queryId}`, publicClientConfig);
+      return publicClient.delete(`/api/queries/removeQuery/${queryId}`, publicClientConfig);
     },
   }
 };
