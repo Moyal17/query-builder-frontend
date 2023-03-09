@@ -12,6 +12,7 @@ import { generateKey } from "../../services/utilsService";
 import { modelNames } from "../../constants/constants";
 import { toast } from 'react-toastify';
 import './QueryBuilderPage.css';
+import LoaderBtn from "../../Components/LoaderBtn/LoaderBtn";
 const { Option } = Select;
 
 class QueryBuilderPage extends Component {
@@ -160,11 +161,11 @@ class QueryBuilderPage extends Component {
           <div className="flex-100 layout-row layout-wrap layout-align-center action-btns">
             { queryDetails && queryDetails.id ? (
               <Fragment>
-                <Button type="danger font16 side-margin-10px" onClick={() => this.cancelUpdateQuery()}>Cancel Update</Button>
-                <Button type="primary font16" onClick={() => this.handleUpdateQuery()}>Update Query</Button>
+                <LoaderBtn text="Cancel Update" type="danger" className="side-margin-5px font16" onClick={() => this.cancelUpdateQuery()} />
+                <LoaderBtn text="Update Query" className="font16" onClick={() => this.handleUpdateQuery()} />
               </Fragment>
               ) : (
-              <Button type="primary font16" onClick={() => this.handleCreateQuery()}>Create Query</Button>
+              <LoaderBtn text="Create Query" className="font16" onClick={() => this.handleCreateQuery()} />
             )}
           </div>
             { isOutputVisible && (

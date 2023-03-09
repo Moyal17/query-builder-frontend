@@ -6,6 +6,7 @@ import { buildQuery } from "../../services/utilsService";
 import queryStringParser from "../../services/queryStringParser";
 import ReactJson from "react-json-view";
 import './QueryExecutor.css';
+import LoaderBtn from "../LoaderBtn/LoaderBtn";
 
 const QueryExecutor = (props) => {
   const [ isCollapseOpen, setCollapseOpen ] = useState(false);
@@ -60,6 +61,7 @@ const QueryExecutor = (props) => {
               { query.description && <p className="queryDesc flex-100 font14 padd-10px">{ query.description }</p> }
             </div>
             <div className="queryAction flex-33 layout-row layout-wrap layout-align-end-end">
+              <LoaderBtn text="Execute Query" className="margin-5 loaderBtn-small" onClick={() => executeQuery(query)} />
               <Button type="dashed" className="margin-5" onClick={() => openModal(true)}>Open Source</Button>
               <Button type="primary" className="margin-5" onClick={() => executeQuery(query)}>Execute Query</Button>
               <Button type="primary" className="margin-5" onClick={() => handleUpdateQuery({...query})}>Update Query</Button>

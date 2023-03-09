@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import { Button} from "antd";
 import { loginUser} from '../../store/actions';
+import LoaderBtn from '../../Components/LoaderBtn/LoaderBtn';
 import {toast} from 'react-toastify';
 
 const LoginPage = (props) => {
@@ -29,13 +30,14 @@ const LoginPage = (props) => {
         closeOnClick: true,
         pauseOnHover: true
       });
+      return;
     }
   }
 
   return (
     <div className="LoginPage flex-100 layout-row layout-wrap layout-align-center-center">
       <div className="login-container card-container flex-initial layout-row layout-wrap layout-align-center-center">
-        <h2 className="margin-bottom-10px">LoginPage</h2>
+        <h2 className="margin-bottom-10px">Login Page</h2>
         <form className="login-form flex-100 layout-row layout-wrap layout-align-center-center padd-10px">
           <input type="email" placeholder="email"
                  className="flex-100 margin-bottom-10px"
@@ -44,9 +46,8 @@ const LoginPage = (props) => {
                  className="flex-100 margin-bottom-10px"
                  onChange={(e) => {handleInputChange('password', e)}}/>
           <div className="login-form flex-100 layout-row layout-wrap layout-align-center-center action-btns padd-10px">
-            <Button type="primary font16" onClick={() => handleLogin()}>login</Button>
+            <LoaderBtn text="Login" className="font16" onClick={() => handleLogin()} />
           </div>
-
           <p className="message">Not registered? <Link to={'/signUp'}>Create an account</Link></p>
         </form>
       </div>
