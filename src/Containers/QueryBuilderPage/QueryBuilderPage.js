@@ -6,6 +6,7 @@ import { getUserQueries, createQuery, updateQuery, removeQuery } from '../../sto
 import actionTypes from '../../store/actions/actionTypes';
 import QueryBuilder from "../../Components/QueryBuilder/QueryBuilder";
 import QueryExecutor from "../../Components/QueryExecutor/QueryExecutor";
+import UserInfo from "../../Components/UserInfo/UserInfo";
 import queryStringParser from "../../services/queryStringParser";
 import { generateKey } from "../../services/utilsService";
 import { modelNames } from "../../constants/constants";
@@ -146,6 +147,7 @@ class QueryBuilderPage extends Component {
       <div className="flex-100 layout-row layout-wrap layout-align-start-start padd15">
         <div className="flex-100 layout-row layout-wrap layout-align-center padd15 text-center">
           <h1 className="flex-100 layout-row layout-align-center">Query Builder Page</h1>
+          <UserInfo history={this.props.history}/>
         </div>
         <div className="card-container flex-100 layout-row layout-wrap layout-align-start-start padd15">
           <div className="flex-100 layout-row layout-wrap layout-align-start-start">

@@ -47,7 +47,7 @@ const apiMethods = {
     register: body => publicClient.post('/public/users/register', body, publicClientConfig),
     login: body => publicClient.post('/public/users/login', body, publicClientConfig),
     logout: () => {
-      localStorage.remove('qb-auth');
+      localStorage.clear();
     },
   },
   queries: {
