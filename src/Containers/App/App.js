@@ -27,8 +27,7 @@ class App extends Component {
   async componentDidMount() {
     try {
       const data = await this.props.checkIfLoggedIn();
-      if (!data || !data.name) this.props.history.push('/login');
-      else this.props.history.push('/queryBuilder');
+      if (data || data.name) this.props.history.push('/queryBuilder');
     } catch (e) {
       this.props.history.push('/login');
     }
@@ -44,16 +43,15 @@ class App extends Component {
             <div className="">
               <Switch>
                 <AuthRoute path="/queryBuilder" userAuth={authorized} component={QueryBuilderPage} />
-                <Route path="/" render={props => <LoginPage {...props} />}/>
                 <Route path="/signUp" render={props => <SignUpPage {...props} />}/>
-                <Redirect to={'/'} render={props => <LoginPage {...props} />}/>
+                <Route path="/" render={props => <LoginPage {...props} />}/>
               </Switch>
             </div>
           </Suspense>
         </div>
         <ToastContainer
           position="bottom-right"
-          autoClose={4000}
+          autoClose={3000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick

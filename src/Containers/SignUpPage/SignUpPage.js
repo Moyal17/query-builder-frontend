@@ -25,7 +25,12 @@ const SignUpPage = (props) => {
         const userCreds = { email, password, name }
         const data = await props.signUpUser(userCreds);
         if (data && data.token) props.history.push('/queryBuilder')
-      } else props.history.push('/')
+      } else {
+        toast.error('Please fill all the fields to register', {
+          closeOnClick: true,
+          pauseOnHover: true
+        });
+      }
     } catch (e) {
       toast.error('An error occurred while signing up', {
         closeOnClick: true,
@@ -48,7 +53,6 @@ const SignUpPage = (props) => {
             <input type="password" placeholder="password"
                    className="margin-bottom-10px"
                    onChange={(e) => {handleInputChange('password', e)}}/>
-
             <div className="login-form flex-100 layout-row layout-wrap layout-align-center-center action-btns padd-10px">
               <Button type="primary font16" onClick={() => handleSignup()}>Sign up</Button>
             </div>

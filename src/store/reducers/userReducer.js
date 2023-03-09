@@ -11,7 +11,7 @@ const userReducer = (state = initialState, action) => {
     case actionTypes.SAVE_USER_CREDENTIALS:
       return {...state, userInfo: action.payload, authorized: true};
     case actionTypes.HANDLE_ERROR_RESPONSE: {
-      toast.error('An error occurred, thats weird...', {closeOnClick: true, pauseOnHover: true});
+      if (!action.payload.response.data.message) toast.error('An error occurred, thats weird...', {closeOnClick: true, pauseOnHover: true});
       return {...state};
     }
     default:
