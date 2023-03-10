@@ -63,7 +63,6 @@ const QueryExecutor = (props) => {
             <div className="queryAction flex-33 layout-row layout-wrap layout-align-end-end">
               <LoaderBtn text="Execute Query" className="margin-5 loaderBtn-small" onClick={() => executeQuery(query)} />
               <Button type="dashed" className="margin-5" onClick={() => openModal(true)}>Open Source</Button>
-              <Button type="primary" className="margin-5" onClick={() => executeQuery(query)}>Execute Query</Button>
               <Button type="primary" className="margin-5" onClick={() => handleUpdateQuery({...query})}>Update Query</Button>
               <Button type="danger" className="margin-5" onClick={() => openModal()}>Delete</Button>
             </div>

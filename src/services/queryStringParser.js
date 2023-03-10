@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 const conditionOp = {
   and: '[Op.and]',
@@ -19,14 +20,15 @@ const operators = {
   notIn: '[Op.notIn]',            // [Op.notIn]: [1, 2]
 };
 
-const complicatedOpMap = ['between', 'notBetween', 'in', 'notIn'];
+const datesOp = ['between', 'notBetween', 'in', 'notIn'];
 const nullOp = ['isNull', 'isNotNull'];
 
 const ruleLogic = (arr, rule) => {
-  if (complicatedOpMap.indexOf(rule.operator) !== -1){
-    arr.push({[rule.fieldName]: { [operators[rule.operator]]: [rule.value]}})
-  } else if (nullOp.indexOf(rule.operator) !== -1) {
+  if (nullOp.indexOf(rule.operator) !== -1) {
     arr.push({[rule.fieldName]: { [operators[rule.operator]]: null}})
+  } else if( datesOp.indexOf(rule.operator) !== -1) {
+    const valuesArr = [ moment(rule.value[0]).startOf('day').format(), moment(rule.value[1]).startOf('day').format()];
+    arr.push({[rule.fieldName]: { [operators[rule.operator]]: valuesArr }})
   } else {
     arr.push({[rule.fieldName]: { [operators[rule.operator]]: rule.value}})
   }

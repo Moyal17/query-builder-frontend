@@ -64,6 +64,7 @@
     "l": "^0.6.0",
     "local-storage": "^1.4.2",
     "mini-css-extract-plugin": "0.11.3",
+    "moment": "^2.29.4",
     "nanoid": "^4.0.1",
     "os-browserify": "^0.3.0",
     "patch-package": "^6.4.7",
