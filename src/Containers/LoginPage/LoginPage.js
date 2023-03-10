@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
-import { Button} from "antd";
-import { loginUser} from '../../store/actions';
+import { loginUser } from '../../store/actions';
 import LoaderBtn from '../../Components/LoaderBtn/LoaderBtn';
 import {toast} from 'react-toastify';
 

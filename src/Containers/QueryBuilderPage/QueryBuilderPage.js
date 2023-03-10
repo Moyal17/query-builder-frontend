@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import ReactJson from 'react-json-view';
-import {Input, Select, Button} from "antd";
+import {Input, Select } from "antd";
 import { getUserQueries, createQuery, updateQuery, removeQuery } from '../../store/actions';
 import actionTypes from '../../store/actions/actionTypes';
 import QueryBuilder from "../../Components/QueryBuilder/QueryBuilder";
